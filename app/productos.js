@@ -142,14 +142,6 @@ export const productos = [
     },
     {
         categoria: "Buzos",
-        nombre: "Buzo Over Perpetual",
-        precio: "$40.000",
-        imagen: "/productos/buzo-over-perpetual-1.jpeg",
-        imagen2: "/productos/buzo-over-perpetual-2.jpeg",
-        talles: "S",
-    },
-    {
-        categoria: "Buzos",
         nombre: "Buzo Over Speak Thut",
         precio: "$40.000",
         imagen: "/productos/buzo-over-speak-thuth-1.jpeg",
@@ -165,10 +157,24 @@ export const productos = [
     },
     {
         categoria: "Buzos",
+        nombre: "Buzo Over Ne",
+        precio: "$34.000",
+        imagen: "/productos/buzo-over-ne-1.jpeg/buzo-over-ne-2.jpeg",
+        talles: "xl",
+    },
+    {
+        categoria: "Buzos",
         nombre: "Buzo Over Myself",
         precio: "$40.000",
         imagen: "/productos/buzo-over-myself.jpeg",
         talles: "L",
+    },
+    {
+        categoria: "Buzos",
+        nombre: "Buzo Over Rosa",
+        precio: "$38.000",
+        imagen: "/productos/buzo-over-rosa-1.jpeg/buzo-over-rosa-2.jpeg",
+        talles: "s",
     },
     {
         categoria: "Buzos",
@@ -235,6 +241,13 @@ export const productos = [
         precio: "$25.000",
         imagen: "/productos/chomba-boxy-alemania.jpeg",
         talles: "M",
+    },
+    {
+        categoria: "Remeras",
+        nombre: "remera boxy fresh",
+        precio: "$24.000",
+        imagen: "/productos/remera-boxy-fresh.jpeg",
+        talles: "s",
     },
     {
         categoria: "Remeras",
@@ -331,6 +344,13 @@ export const productos = [
         precio: "$19.000",
         imagen: "/productos/over-grave.jpeg",
         talles: "M",
+    },
+    {
+        categoria: "Remeras",
+        nombre: "Over Luck this",
+        precio: "$19.000",
+        imagen: "/productos/remera-over-luck-this-1.jpeg/remera-over-luck-this-2.jpeg",
+        talles: "l",
     },
     {
         categoria: "Remeras",
