@@ -142,14 +142,6 @@ export const productos = [
     },
     {
         categoria: "Buzos",
-        nombre: "Buzo Over No Day",
-        precio: "$40.000",
-        imagen: "/productos/buzo-over-no-day-1.jpeg",
-        imagen2: "/productos/buzo-over-no-day-2.jpeg",
-        talles: "L",
-    },
-    {
-        categoria: "Buzos",
         nombre: "Buzo Over Perpetual",
         precio: "$40.000",
         imagen: "/productos/buzo-over-perpetual-1.jpeg",
