@@ -351,7 +351,8 @@ export const productos = [
         categoria: "Remeras",
         nombre: "Over Luck this",
         precio: "$19.000",
-        imagen: "/productos/remera-over-luck-this-1.jpeg/remera-over-luck-this-2.jpeg",
+        imagen: "/productos/remera-over-luck-this-1.jpeg",
+        imagen2: "/productos/remera-over-luck-this-2.jpeg",
         talles: "l",
     },
     {
