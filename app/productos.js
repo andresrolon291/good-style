@@ -159,7 +159,8 @@ export const productos = [
         categoria: "Buzos",
         nombre: "Buzo Over Ne",
         precio: "$34.000",
-        imagen: "/productos/buzo-over-ne-1.jpeg/buzo-over-ne-2.jpeg",
+        imagen: "/productos/buzo-over-ne-1.jpeg",
+        imagen2: "/productos/buzo-over-ne-2.jpeg",
         talles: "xl",
     },
     {
@@ -173,7 +174,8 @@ export const productos = [
         categoria: "Buzos",
         nombre: "Buzo Over Rosa",
         precio: "$38.000",
-        imagen: "/productos/buzo-over-rosa-1.jpeg/buzo-over-rosa-2.jpeg",
+        imagen: "/productos/buzo-over-rosa-1.jpeg",
+        imagen2: "/productos/buzo-over-rosa-2.jpeg",
         talles: "s",
     },
     {
