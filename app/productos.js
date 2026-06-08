@@ -33,7 +33,7 @@ export const productos = [
         nombre: "Baggy Clasico Celeste",
         precio: "$39.000",
         imagen: "/productos/baggy-clasico-celeste.jpeg",
-        talles: "38, 42",
+        talles: "42",
     },
     {
         categoria: "Jeans",
@@ -667,7 +667,7 @@ export const productos = [
         nombre: "Jeans Semi Baggy Gris Nevado Pinzas",
         precio: "$39.000",
         imagen: "/productos/semi-baggy-gris-nevado-pinzas-al-costado.jpeg",
-        talles: "40",
+        talles: "38",
     },
     {
         categoria: "Jeans",
@@ -675,13 +675,6 @@ export const productos = [
         precio: "$39.000",
         imagen: "/productos/semi-baggy-gris-oscuro.jpeg",
         talles: "38",
-    },
-    {
-        categoria: "Jeans",
-        nombre: "Jeans Super Baggy Beige",
-        precio: "$39.000",
-        imagen: "/productos/super-baggy-beige.jpeg",
-        talles: "40",
     },
     {
         categoria: "Jeans",
