@@ -215,8 +215,8 @@ export default function Home() {
                                 alt={producto.nombre}
                                 style={{
                                     width: "100%",
-                                    height: "300px",
-                                    objectFit: "cover",
+                                    height: "auto",
+                                    objectFit: "contain",
                                     borderRadius: "10px",
                                 }}
                             />
