@@ -629,6 +629,13 @@ export const productos = [
     },
     {
         categoria: "Jeans",
+        nombre: "Jogging Mom Chicago",
+        precio: "$26.000",
+        imagen: "/productos/jogging-mom-chicago.jpeg",
+        talles: "M",
+    },
+    {
+        categoria: "Jeans",
         nombre: "Jeans Mom Gris Nevado",
         precio: "$39.000",
         imagen: "/productos/jeans-mom-gris-nevado.jpeg",
