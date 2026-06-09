@@ -7,6 +7,7 @@ export default function Home() {
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos");
     const [carrito, setCarrito] = useState([]);
     const [imagenActual, setImagenActual] = useState({});
+    const [imagenGrande, setImagenGrande] = useState(null);
 
         const total = carrito.reduce(
             (acum, item) =>
@@ -213,11 +214,21 @@ export default function Home() {
                                     ].filter(Boolean)[imagenActual[producto.nombre] || 0]
                                 }
                                 alt={producto.nombre}
+                                onClick={() =>
+                                    setImagenGrande(
+                                        [
+                                            producto.imagen,
+                                            producto.imagen2,
+                                            producto.imagen3,
+                                        ].filter(Boolean)[imagenActual[producto.nombre] || 0]
+                                    )
+                                }
                                 style={{
                                     width: "100%",
-                                    height: "auto",
-                                    objectFit: "contain",
+                                    height: "300px",
+                                    objectFit: "cover",
                                     borderRadius: "10px",
+                                    cursor: "pointer",
                                 }}
                             />
 
@@ -352,6 +363,34 @@ export default function Home() {
                 <h3>Envíos</h3>
                 <p>Motomandado • Correo Argentino • Vía Cargo</p>
             </div>
+            {imagenGrande && (
+                <div
+                    onClick={() => setImagenGrande(null)}
+                    style={{
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        background: "rgba(0,0,0,0.9)",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        zIndex: 9999,
+                        cursor: "pointer",
+                    }}
+                >
+                    <img
+                        src={imagenGrande}
+                        alt="Imagen ampliada"
+                        style={{
+                            maxWidth: "95%",
+                            maxHeight: "95%",
+                            objectFit: "contain",
+                        }}
+                    />
+                </div>
+            )}
             <a
                 href="https://wa.me/5493786411223"
                 target="_blank"
