@@ -198,7 +198,7 @@ export const productos = [
         nombre: "Sweter Waffle black",
         precio: "$22.500",
         imagen: "/productos/sweter-waffle-black.jpeg",
-        talles: "2, 3",
+        talles: "2",
     },
     {
         categoria: "Buzos",
