@@ -162,7 +162,7 @@ export default function Home() {
                     margin: "30px 0",
                 }}
             >
-                {["Todos", "Jeans", "Buzos", "Remeras", "Gorras"].map((categoria) => (
+                {["Todos", "Jeans", "Buzos", "Remeras", "Accesorios"].map((categoria) => (
                     <button
                         key={categoria}
                         onClick={() => setCategoriaSeleccionada(categoria)}
