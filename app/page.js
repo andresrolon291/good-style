@@ -318,7 +318,24 @@ export default function Home() {
                                 marginBottom: "10px",
                             }}
                         >
-                            Talles: {producto.talles}
+                            {producto.descripcion && (
+                                <div
+                                    style={{
+                                        fontSize: "14px",
+                                        color: "#666",
+                                        marginTop: "8px",
+                                        lineHeight: "1.4",
+                                    }}
+                                >
+                                    {producto.descripcion}
+                                    {producto.contenido && (
+                                        <span>Contenido: {producto.contenido}</span>
+                                    )}
+                                </div>
+                            )}
+                            {producto.talles && (
+                                <p>Talles: {producto.talles}</p>
+                            )}
                         </p>
                         <button
                             onClick={() => setCarrito([...carrito, producto])}
