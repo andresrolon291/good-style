@@ -79,21 +79,12 @@ export const productos = [
         imagen3: "/productos/jeans-baggy-bolsillos-bordado-3.jpeg",
         talles: "38",
     },
-
     {
         categoria: "Buzos",
         nombre: "Buzo Boxy Gris",
         precio: "$40.000",
         imagen: "/productos/buzo-boxy-gris.jpeg",
         talles: "L",
-    },
-    {
-        categoria: "Buzos",
-        nombre: "Buzo Clasico Alternative",
-        precio: "$38.000",
-        imagen: "/productos/buzo-clasico-alternative-1.jpeg",
-        imagen2: "/productos/buzo-clasico-alternative-2.jpeg",
-        talles: "M",
     },
     {
         categoria: "Buzos",
@@ -147,13 +138,6 @@ export const productos = [
         imagen: "/productos/buzo-over-speak-thuth-1.jpeg",
         imagen2: "/productos/buzo-over-speak-thuth-2.jpeg",
         talles: "L",
-    },
-    {
-        categoria: "Buzos",
-        nombre: "Buzo Over White",
-        precio: "$38.000",
-        imagen: "/productos/buzo-over-white.jpeg",
-        talles: "S",
     },
     {
         categoria: "Buzos",
@@ -623,13 +607,6 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Jogging Baggy Negro",
-        precio: "$35.000",
-        imagen: "/productos/jogging-baggy-negro.jpeg",
-        talles: "M",
-    },
-    {
-        categoria: "Jeans",
         nombre: "Baggy Black Recortes",
         precio: "$39.000",
         imagen: "/productos/baggy-black-recortes.jpeg",
@@ -693,13 +670,6 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Jeans Mom Gris Nevado",
-        precio: "$39.000",
-        imagen: "/productos/jeans-mom-gris-nevado.jpeg",
-        talles: "40",
-    },
-    {
-        categoria: "Jeans",
         nombre: "Jeans Semi Baggy Óxido",
         precio: "$39.000",
         imagen: "/productos/jeans-semi-baggy-oxido.jpeg",
@@ -710,13 +680,6 @@ export const productos = [
         nombre: "Jeans Semi Baggy Cargo Óxido",
         precio: "$39.000",
         imagen: "/productos/semi-baggy-cargo-oxido.jpeg",
-        talles: "38",
-    },
-    {
-        categoria: "Jeans",
-        nombre: "Jeans Baggy Costuras",
-        precio: "$39.000",
-        imagen: "/productos/semi-baggy-costuras.jpeg",
         talles: "38",
     },
     {
