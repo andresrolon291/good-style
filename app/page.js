@@ -1,11 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { productos } from "./productos";
 import Image from "next/image";
 export default function Home() {
 
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos");
+    const [busqueda, setBusqueda] = useState("");
+    const [talleSeleccionado, setTalleSeleccionado] = useState("Todos");
     const [carrito, setCarrito] = useState([]);
+    const [carritoCargado, setCarritoCargado] = useState(false);
     const [imagenActual, setImagenActual] = useState({});
     const [imagenGrande, setImagenGrande] = useState(null);
 
@@ -19,28 +22,89 @@ export default function Home() {
         id: index + 1,
     }));
 
-    const productosFiltrados =
-        categoriaSeleccionada === "Todos"
-            ? productosConId
-            : productosConId.filter(
-                (producto) =>
-                    producto.categoria === categoriaSeleccionada
-            );
+    const textoBusqueda = busqueda.trim().toLowerCase();
+
+    const ordenTalles = ["S", "M", "L", "XL", "XXL", "38", "40", "42", "44", "46"];
+    const tallesDisponibles = [
+        "Todos",
+        ...[...new Set(
+            productosConId
+                .flatMap((producto) =>
+                    producto.talles
+                        ? producto.talles.split(",").map((talle) => talle.trim().toUpperCase())
+                        : []
+                )
+                .filter(Boolean)
+        )].sort((a, b) => {
+            const posicionA = ordenTalles.indexOf(a);
+            const posicionB = ordenTalles.indexOf(b);
+
+            if (posicionA === -1 && posicionB === -1) {
+                return a.localeCompare(b, "es-AR", { numeric: true });
+            }
+
+            if (posicionA === -1) return 1;
+            if (posicionB === -1) return -1;
+
+            return posicionA - posicionB;
+        }),
+    ];
+
+    const productosFiltrados = productosConId.filter((producto) => {
+        const coincideCategoria =
+            categoriaSeleccionada === "Todos" ||
+            producto.categoria === categoriaSeleccionada;
+
+        const tallesProducto = producto.talles
+            ? producto.talles.split(",").map((talle) => talle.trim().toUpperCase())
+            : [];
+
+        const coincideTalle =
+            talleSeleccionado === "Todos" || tallesProducto.includes(talleSeleccionado);
+
+        const textoProducto = [
+            producto.nombre,
+            producto.descripcion,
+            producto.talles,
+            producto.categoria,
+        ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+
+        const coincideBusqueda =
+            textoBusqueda === "" || textoProducto.includes(textoBusqueda);
+
+        return coincideCategoria && coincideTalle && coincideBusqueda;
+    });
+
+    useEffect(() => {
+        const carritoGuardado = localStorage.getItem("goodStyleCarrito");
+
+        if (carritoGuardado) {
+            setCarrito(JSON.parse(carritoGuardado));
+        }
+
+        setCarritoCargado(true);
+    }, []);
+
+    useEffect(() => {
+        if (carritoCargado) {
+            localStorage.setItem("goodStyleCarrito", JSON.stringify(carrito));
+        }
+    }, [carrito, carritoCargado]);
 
         return (
-        <main style={{ background: "#ffffff", minHeight: "100vh", color: "#111", padding: "20px" }}>
+        <main className="page">
 
 
-            <div style={{ textAlign: "center", marginBottom: "20px" }}>
+            <div className="heroHeader">
                 <Image
+                    className="brandLogo"
                     src="/logo-good-style.jpeg"
                     alt="Good Style"
                     width={500}
                     height={200}
-                    style={{
-                        maxWidth: "100%",
-                        height: "auto",
-                    }}
                 />
 
                 <p
@@ -53,8 +117,8 @@ export default function Home() {
                     Streetwear urbano masculino
                 </p>
 
-                <p>
-                    🚚 Motomandado a domicilio • 📮 Correo Argentino • 📦 Vía Cargo • 🏪 Retiro en local
+                <p className="shippingInfo">
+                    Motomandado a domicilio | Correo Argentino | Via Cargo | Retiro en local
                 </p>
             </div>
             <p style={{ textAlign: "center", color: "#7cff7c" }}>
@@ -64,7 +128,7 @@ export default function Home() {
                 style={{
                     maxWidth: "600px",
                     margin: "20px auto",
-                    padding: "20px",
+                    padding: carrito.length === 0 ? "14px 16px" : "20px",
                     border: "2px solid #2f8f46",
                     borderRadius: "15px",
                     background: "#f8fff8",
@@ -77,11 +141,13 @@ export default function Home() {
                         marginBottom: "15px",
                     }}
                 >
-                    🛒 Tu Pedido ({carrito.length})
+                    Tu Pedido ({carrito.length})
                 </h2>
 
                 {carrito.length === 0 ? (
-                    <p>No hay productos seleccionados</p>
+                    <p style={{ margin: "8px 0 0", color: "#555" }}>
+                        Agrega productos para armar tu pedido.
+                    </p>
                 ) : (
                     <>
                         {carrito.map((item, index) => (
@@ -111,7 +177,7 @@ export default function Home() {
                                         cursor: "pointer",
                                     }}
                                 >
-                                    ❌
+                                    Eliminar
                                 </button>
                             </div>
                         ))}
@@ -125,24 +191,41 @@ export default function Home() {
                     >
                     Total: ${total.toLocaleString("es-AR")}
                     </p>
+                    <button
+                        onClick={() => setCarrito([])}
+                        style={{
+                            width: "100%",
+                            padding: "10px",
+                            marginTop: "8px",
+                            background: "#ffffff",
+                            color: "#ff4d4d",
+                            border: "1px solid #ff4d4d",
+                            borderRadius: "8px",
+                            cursor: "pointer",
+                            fontWeight: "700",
+                        }}
+                    >
+                        Vaciar pedido
+                    </button>
                     </>
                 )}
             </div>
+            {carrito.length > 0 && (
             <a
                 href={`https://wa.me/5493786411223?text=${encodeURIComponent(
-                    "Hola Good Style! 👋\n\n" +
+                    "Hola Good Style!\n\n" +
                     "Quiero comprar:\n\n" +
-                    carrito.map(item => `• ${item.nombre} - ${item.precio}`).join("\n") +
-                    "\n\n💰 Total: $" +
+                    carrito.map(item => `- ${item.nombre} - ${item.precio}`).join("\n") +
+                    "\n\nTotal: $" +
                     total.toLocaleString("es-AR") +
-                    "\n\n📦 Método de entrega:\n" +
-                    "☐ Motomandado a domicilio\n" +
-                    "☐ Correo Argentino\n" +
-                    "☐ Vía Cargo\n" +
-                    "☐ Retiro en local\n\n" +
-                    "👤 Nombre:\n" +
-                    "📍 Localidad:\n" +
-                    "🏠 Dirección (si corresponde):"
+                    "\n\nMetodo de entrega:\n" +
+                    "- Motomandado a domicilio\n" +
+                    "- Correo Argentino\n" +
+                    "- Via Cargo\n" +
+                    "- Retiro en local\n\n" +
+                    "Nombre:\n" +
+                    "Localidad:\n" +
+                    "Direccion (si corresponde):"
                 )}`}
                 target="_blank"
                 style={{
@@ -157,19 +240,30 @@ export default function Home() {
             >
                 Finalizar pedido por WhatsApp
             </a>
+            )}
             <div
                 style={{
+                    position: "sticky",
+                    top: 0,
+                    zIndex: 20,
                     display: "flex",
                     justifyContent: "center",
                     gap: "10px",
                     flexWrap: "wrap",
-                    margin: "30px 0",
+                    margin: "30px -20px 18px",
+                    padding: "12px 20px",
+                    background: "rgba(255,255,255,0.96)",
+                    borderBottom: "1px solid #eeeeee",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
                 }}
             >
                 {["Todos", "Jeans", "Buzos", "Remeras", "Accesorios"].map((categoria) => (
                     <button
                         key={categoria}
-                        onClick={() => setCategoriaSeleccionada(categoria)}
+                        onClick={() => {
+                            setCategoriaSeleccionada(categoria);
+                            setTalleSeleccionado("Todos");
+                        }}
                         style={{
                             padding: "10px 15px",
                             border: "none",
@@ -187,6 +281,68 @@ export default function Home() {
                         }}
                     >
                         {categoria}
+                    </button>
+                ))}
+            </div>
+            <div
+                style={{
+                    maxWidth: "600px",
+                    margin: "0 auto 25px",
+                }}
+            >
+                <input
+                    type="search"
+                    value={busqueda}
+                    onChange={(e) => setBusqueda(e.target.value)}
+                    placeholder="Buscar producto..."
+                    aria-label="Buscar producto"
+                    style={{
+                        width: "100%",
+                        padding: "14px 16px",
+                        border: "2px solid #e5e5e5",
+                        borderRadius: "12px",
+                        fontSize: "16px",
+                        outline: "none",
+                        color: "#111",
+                        background: "#ffffff",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
+                    }}
+                />
+            </div>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "8px",
+                    flexWrap: "wrap",
+                    margin: "0 0 25px",
+                }}
+            >
+                {tallesDisponibles.map((talle) => (
+                    <button
+                        key={talle}
+                        onClick={() => {
+                            setTalleSeleccionado(talle);
+                            setCategoriaSeleccionada("Todos");
+                        }}
+                        style={{
+                            padding: "8px 12px",
+                            border: "none",
+                            borderRadius: "999px",
+                            cursor: "pointer",
+                            background:
+                                talleSeleccionado === talle
+                                    ? "#111"
+                                    : "#f0f0f0",
+                            color:
+                                talleSeleccionado === talle
+                                    ? "white"
+                                    : "#111",
+                            fontWeight: "700",
+                            fontSize: "0.9rem",
+                        }}
+                    >
+                        {talle === "Todos" ? "Todos los talles" : talle}
                     </button>
                 ))}
             </div>
@@ -377,14 +533,26 @@ export default function Home() {
                         </a>
                     </div>
                 ))}
+                {productosFiltrados.length === 0 && (
+                    <p
+                        style={{
+                            gridColumn: "1 / -1",
+                            textAlign: "center",
+                            color: "#666",
+                            fontSize: "1rem",
+                        }}
+                    >
+                        No encontramos productos con esa busqueda.
+                    </p>
+                )}
             </div>
 
             <div style={{ marginTop: "50px", textAlign: "center" }}>
-                <h3>Métodos de pago</h3>
+                <h3>Metodos de pago</h3>
                 <p>Mercado Pago</p>
 
-                <h3>Envíos</h3>
-                <p>Motomandado • Correo Argentino • Vía Cargo</p>
+                <h3>Envios</h3>
+                <p>Motomandado | Correo Argentino | Via Cargo</p>
             </div>
             {imagenGrande && (
                 <div
@@ -435,8 +603,10 @@ export default function Home() {
                     zIndex: 999,
                 }}
             >
-                💬
+                Chat
             </a>
         </main>
     );
 }
+
+

@@ -17,3 +17,44 @@ img {
 button {
     cursor: pointer;
 }
+
+.page {
+    background: #ffffff;
+    min-height: 100vh;
+    color: #111111;
+    padding: 20px;
+}
+
+.heroHeader {
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.brandLogo {
+    width: min(100%, 420px);
+    height: auto;
+}
+
+.shippingInfo {
+    max-width: 680px;
+    margin: 8px auto 0;
+    color: #222222;
+    font-size: 0.98rem;
+    line-height: 1.45;
+}
+
+@media (max-width: 600px) {
+    .heroHeader {
+        margin-bottom: 10px;
+    }
+
+    .brandLogo {
+        width: min(100%, 330px);
+    }
+
+    .shippingInfo {
+        max-width: 340px;
+        font-size: 0.9rem;
+        line-height: 1.35;
+    }
+}

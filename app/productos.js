@@ -8,7 +8,7 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Jogging Baggy Bordó",
+        nombre: "Jogging Baggy Bordo",
         precio: "$35.000",
         imagen: "/productos/jogging-baggy-bordo.jpeg",
         talles: "S",
@@ -172,7 +172,7 @@ export const productos = [
         nombre: "Jogger Mom Frizado",
         precio: "$30.000",
         imagen: "/productos/jogger-mom-frizado.jpeg",
-        talles: "3",
+        talles: "L",
     },
     {
         categoria: "Jeans",
@@ -197,10 +197,10 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Baggy Bolsillos Bordados",
+        nombre: "Baggy Bolsillos Bordoos",
         precio: "$39.000",
-        imagen: "/productos/baggy-bolsillos-bordados-1.jpeg",
-        imagen2: "/productos/baggy-bolsillos-bordados-2.jpeg",
+        imagen: "/productos/baggy-bolsillos-Bordoos-1.jpeg",
+        imagen2: "/productos/baggy-bolsillos-Bordoos-2.jpeg",
         talles: "40",
     },
     {
@@ -247,11 +247,11 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Jeans Baggy Bolsillos Bordado",
+        nombre: "Jeans Baggy Bolsillos Bordoo",
         precio: "$39.000",
-        imagen: "/productos/jeans-baggy-bolsillos-bordado-1.jpeg",
-        imagen2: "/productos/jeans-baggy-bolsillos-bordado-2.jpeg",
-        imagen3: "/productos/jeans-baggy-bolsillos-bordado-3.jpeg",
+        imagen: "/productos/jeans-baggy-bolsillos-Bordoo-1.jpeg",
+        imagen2: "/productos/jeans-baggy-bolsillos-Bordoo-2.jpeg",
+        imagen3: "/productos/jeans-baggy-bolsillos-Bordoo-3.jpeg",
         talles: "38",
     },
     {
@@ -394,7 +394,7 @@ export const productos = [
         nombre: "Sweter Waffle black",
         precio: "$22.500",
         imagen: "/productos/sweter-waffle-black.jpeg",
-        talles: "2",
+        talles: "M",
     },
     {
         categoria: "Buzos",
@@ -405,14 +405,14 @@ export const productos = [
     },
     {
         categoria: "Buzos",
-        nombre: "Sweter Plush Marrón",
+        nombre: "Sweter Plush Marron",
         precio: "$22.500",
         imagen: "/productos/sweter-plush-marron.jpeg",
         talles: "L",
     },
     {
         categoria: "Buzos",
-        nombre: "Sweter Plush Bordó",
+        nombre: "Sweter Plush Bordo",
         precio: "$22.500",
         imagen: "/productos/sweter-plush-bordo.jpeg",
         talles: "M",
@@ -422,14 +422,14 @@ export const productos = [
         nombre: "Sweter Waffle Plush",
         precio: "$36.000",
         imagen: "/productos/sweter-waffle-plush.jpeg",
-        talles: "2",
+        talles: "M",
     },
     {
         categoria: "Buzos",
         nombre: "Sweter White",
         precio: "$22.500",
         imagen: "/productos/sweter-white.jpeg",
-        talles: "2",
+        talles: "M",
     },
     {
         categoria: "Buzos",
@@ -760,7 +760,7 @@ export const productos = [
     },
     {
         categoria: "Accesorios",
-        nombre: "Riñonera Impermeable",
+        nombre: "Rinonera Impermeable",
         precio: "$22.500",
         imagen: "/productos/riñonera-impermeable.jpeg",
     },
@@ -776,14 +776,14 @@ export const productos = [
         nombre: "Old Body Spray Fakhar",
         precio: "$15.000",
         imagen: "/productos/old-body-spray-fakhar-200-ml.jpeg",
-        descripcion: "Body spray refrescante con aroma masculino intenso y excelente duración,200ml.",
+        descripcion: "Body spray refrescante con aroma masculino intenso y excelente duracion, 200ml.",
     },
     {
         categoria: "Accesorios",
         nombre: "Fakhar Lattafa",
         precio: "$24.000",
         imagen: "/productos/fakhar-latfafa-70-ml.jpeg",
-        descripcion: "Fragancia árabe moderna con notas frescas, especiadas y amaderadas,70ml.",
+        descripcion: "Fragancia arabe moderna con notas frescas, especiadas y amaderadas, 70ml.",
     },
     {
         categoria: "Accesorios",
@@ -797,7 +797,7 @@ export const productos = [
         nombre: "Ameerat Al Arab",
         precio: "$40.000",
         imagen: "/productos/ameerat-al-arab-ara-100-ml.jpeg",
-        descripcion: "Fragancia árabe sofisticada con excelente presencia y larga duración,100ml.",
+        descripcion: "Fragancia arabe sofisticada con excelente presencia y larga duracion, 100ml.",
     },
     {
         categoria: "Accesorios",
@@ -832,28 +832,28 @@ export const productos = [
         nombre: "Gorro Boston",
         precio: "$14.500",
         imagen: "/productos/gorro-boston.jpeg",
-        descripcion: "Gorros de hilo con logo bordado.",
+        descripcion: "Gorros de hilo con logo Bordoo.",
     },
     {
         categoria: "Accesorios",
         nombre: "Gorro Mate",
         precio: "$14.500",
         imagen: "/productos/gorro-mate.jpeg",
-        descripcion: "Gorros de hilo con logo bordado.",
+        descripcion: "Gorros de hilo con logo Bordoo.",
     },
     {
         categoria: "Accesorios",
         nombre: "Gorro Miami",
         precio: "$14.500",
         imagen: "/productos/gorro-miami.jpeg",
-        descripcion: "Gorros de hilo con logo bordado.",
+        descripcion: "Gorros de hilo con logo Bordoo.",
     },
     {
         categoria: "Accesorios",
         nombre: "Gorro New Orleans",
         precio: "$14.500",
         imagen: "/productos/gorro-new-orleans.jpeg",
-        descripcion: "Gorros de hilo con logo bordado.",
+        descripcion: "Gorros de hilo con logo Bordoo.",
     },
     {
         categoria: "Accesorios",
@@ -902,3 +902,4 @@ export const productos = [
         descripcion: "",
     },
 ];
+
