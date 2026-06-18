@@ -14,14 +14,18 @@ export default function Home() {
                 acum + Number(item.precio.replace("$", "").replace(".", "")),
             0
         );
+    const productosConId = productos.map((producto, index) => ({
+        ...producto,
+        id: index + 1,
+    }));
 
-        const productosFiltrados =
-            categoriaSeleccionada === "Todos"
-                ? productos
-                : productos.filter(
-                    (producto) =>
-                        producto.categoria === categoriaSeleccionada
-                );
+    const productosFiltrados =
+        categoriaSeleccionada === "Todos"
+            ? productosConId
+            : productosConId.filter(
+                (producto) =>
+                    producto.categoria === categoriaSeleccionada
+            );
 
         return (
         <main style={{ background: "#ffffff", minHeight: "100vh", color: "#111", padding: "20px" }}>
@@ -196,7 +200,7 @@ export default function Home() {
             >
                 {productosFiltrados.map((producto) => (
                     <div
-                        key={producto.nombre}
+                        key={producto.id}
                         style={{
                             background: "#ffffff",
                             boxShadow: "0 5px 20px rgba(0,0,0,0.08)",
@@ -211,7 +215,7 @@ export default function Home() {
                                         producto.imagen,
                                         producto.imagen2,
                                         producto.imagen3,
-                                    ].filter(Boolean)[imagenActual[producto.nombre] || 0]
+                                    ].filter(Boolean)[imagenActual[producto.id] || 0]
                                 }
                                 alt={producto.nombre}
                                 onClick={() =>
@@ -220,7 +224,7 @@ export default function Home() {
                                             producto.imagen,
                                             producto.imagen2,
                                             producto.imagen3,
-                                        ].filter(Boolean)[imagenActual[producto.nombre] || 0]
+                                        ].filter(Boolean)[imagenActual[producto.id] || 0]
                                     )
                                 }
                                 style={{
@@ -244,8 +248,8 @@ export default function Home() {
 
                                             setImagenActual({
                                                 ...imagenActual,
-                                                [producto.nombre]:
-                                                    ((imagenActual[producto.nombre] || 0) - 1 + imagenes.length) %
+                                                [producto.id]:
+                                                    ((imagenActual[producto.id] || 0) - 1 + imagenes.length) %
                                                     imagenes.length,
                                             });
                                         }}
@@ -276,8 +280,8 @@ export default function Home() {
 
                                             setImagenActual({
                                                 ...imagenActual,
-                                                [producto.nombre]:
-                                                    ((imagenActual[producto.nombre] || 0) + 1) %
+                                                [producto.id]:
+                                                    ((imagenActual[producto.id] || 0) + 1) %
                                                     imagenes.length,
                                             });
                                         }}
@@ -338,7 +342,9 @@ export default function Home() {
                             )}
                         </p>
                         <button
-                            onClick={() => setCarrito([...carrito, producto])}
+                            onClick={() =>
+                                setCarrito((prev) => [...prev, producto])
+                            }
                             style={{
                                 width: "100%",
                                 padding: "10px",

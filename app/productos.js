@@ -8,6 +8,13 @@ export const productos = [
     },
     {
         categoria: "Jeans",
+        nombre: "Baggy Celeste",
+        precio: "$39.000",
+        imagen: "/productos/baggy-celeste.jpeg",
+        talles: "46",
+    },
+    {
+        categoria: "Jeans",
         nombre: "Baggy Black",
         precio: "$39.000",
         imagen: "/productos/baggy-black.jpeg",
@@ -593,13 +600,6 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Baggy Celeste",
-        precio: "$39.000",
-        imagen: "/productos/baggy-celeste.jpeg",
-        talles: "46",
-    },
-    {
-        categoria: "Jeans",
         nombre: "Baggy Celim",
         precio: "$39.000",
         imagen: "/productos/baggy-celim.jpeg",
@@ -611,13 +611,6 @@ export const productos = [
         precio: "$39.000",
         imagen: "/productos/baggy-nevado-gris.jpeg",
         talles: "44,46",
-    },
-    {
-        categoria: "Jeans",
-        nombre: "Baggy Oxido",
-        precio: "$39.000",
-        imagen: "/productos/baggy-oxido.jpeg",
-        talles: "46",
     },
     {
         categoria: "Jeans",
@@ -773,13 +766,6 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Baggy Localizado Oxido",
-        precio: "$39.000",
-        imagen: "/productos/baggy-localizado-oxido.jpeg",
-        talles: "38",
-    },
-    {
-        categoria: "Jeans",
         nombre: "Baggy Prototipe",
         precio: "$39.000",
         imagen: "/productos/baggy-prototipe.jpeg",
@@ -800,14 +786,7 @@ export const productos = [
         talles: "S",
     },
     {
-        categoria: "Buzos",
-        nombre: "Buzo Chomba Originals Gris",
-        precio: "$40.000",
-        imagen: "/productos/buzo-chomba-original-gris.jpeg",
-        talles: "M",
-    },
-    {
-        categoria: "Pantalones",
+        categoria: "Jeans",
         nombre: "Joggin Baggy",
         precio: "$35.000",
         imagen: "/productos/joggin-baggy.jpeg",
