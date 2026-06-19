@@ -352,14 +352,6 @@ export const productos = [
     },
     {
         categoria: "Buzos",
-        nombre: "Buzo Over Speak Thut",
-        precio: "$40.000",
-        imagen: "/productos/buzo-over-speak-thuth-1.jpeg",
-        imagen2: "/productos/buzo-over-speak-thuth-2.jpeg",
-        talles: "L",
-    },
-    {
-        categoria: "Buzos",
         nombre: "Buzo Over Ne",
         precio: "$34.000",
         imagen: "/productos/buzo-over-ne-1.jpeg",
@@ -730,6 +722,12 @@ export const productos = [
     },
     {
         categoria: "Accesorios",
+        nombre: "Gorra New York 1985",
+        precio: "$12.500",
+        imagen: "/productos/gorra-new-york-1985.jpeg",
+    },
+    {
+        categoria: "Accesorios",
         nombre: "Gorra Boston",
         precio: "$12.500",
         imagen: "/productos/gorra-boston.jpeg",
@@ -822,13 +820,6 @@ export const productos = [
     },
     {
         categoria: "Accesorios",
-        nombre: "Spicebomb Night Vision",
-        precio: "$32.000",
-        imagen: "/productos/spicebomb-nigh-vision-90-ml.jpeg",
-        descripcion: "Fragancia fresca y misteriosa con un toque especiado ideal para la noche,90ml.",
-    },
-    {
-        categoria: "Accesorios",
         nombre: "Gorro Boston",
         precio: "$14.500",
         imagen: "/productos/gorro-boston.jpeg",
@@ -892,13 +883,6 @@ export const productos = [
         nombre: "Reloj Retro Golden",
         precio: "$16.000",
         imagen: "/productos/reloj-retro-golden.jpeg",
-        descripcion: "",
-    },
-    {
-        categoria: "Accesorios",
-        nombre: "Reloj Retro Plata",
-        precio: "$16.000",
-        imagen: "/productos/reloj-retro-plata.jpeg",
         descripcion: "",
     },
 ];
