@@ -50,13 +50,6 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Mom Azul Liso",
-        precio: "$39.000",
-        imagen: "/productos/mom-azul-liso.jpeg",
-        talles: "42",
-    },
-    {
-        categoria: "Jeans",
         nombre: "Mom Nevado Azul",
         precio: "$39.000",
         imagen: "/productos/mom-nevado-azul.jpeg",
@@ -109,21 +102,7 @@ export const productos = [
         nombre: "Jeans Semi Baggy Gris Oscuro",
         precio: "$39.000",
         imagen: "/productos/semi-baggy-gris-oscuro.jpeg",
-        talles: "38,40,44,46",
-    },
-    {
-        categoria: "Jeans",
-        nombre: "Jeans Semi Baggy Camuflado",
-        precio: "$39.000",
-        imagen: "/productos/semi-baggy-camuflado-blue.jpeg",
-        talles: "38",
-    },
-    {
-        categoria: "Jeans",
-        nombre: "Baggy Autshin",
-        precio: "$39.000",
-        imagen: "/productos/baggy-autshin.jpeg",
-        talles: "38",
+        talles: "40,44,46",
     },
     {
         categoria: "Jeans",
@@ -162,13 +141,6 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Semi Baggy Gris Perla",
-        precio: "$39.000",
-        imagen: "/productos/semi-baggy-gris-perla.jpeg",
-        talles: "40, 42",
-    },
-    {
-        categoria: "Jeans",
         nombre: "Jogger Mom Frizado",
         precio: "$30.000",
         imagen: "/productos/jogger-mom-frizado.jpeg",
@@ -197,10 +169,10 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Baggy Bolsillos Bordoos",
+        nombre: "Baggy Bolsillos Bordados",
         precio: "$39.000",
-        imagen: "/productos/baggy-bolsillos-Bordoos-1.jpeg",
-        imagen2: "/productos/baggy-bolsillos-Bordoos-2.jpeg",
+        imagen: "/productos/baggy-bolsillos-Bordados-1.jpeg",
+        imagen2: "/productos/baggy-bolsillos-Bordados-2.jpeg",
         talles: "40",
     },
     {
@@ -209,13 +181,6 @@ export const productos = [
         precio: "$39.000",
         imagen: "/productos/baggy-cargo-azul-nevado.jpeg",
         talles: "40",
-    },
-    {
-        categoria: "Jeans",
-        nombre: "Baggy Clasico Celeste",
-        precio: "$39.000",
-        imagen: "/productos/baggy-clasico-celeste.jpeg",
-        talles: "38",
     },
     {
         categoria: "Jeans",
@@ -244,15 +209,6 @@ export const productos = [
         precio: "$39.000",
         imagen: "/productos/baggy-localizado-bigotes.jpeg",
         talles: "40",
-    },
-    {
-        categoria: "Jeans",
-        nombre: "Jeans Baggy Bolsillos Bordoo",
-        precio: "$39.000",
-        imagen: "/productos/jeans-baggy-bolsillos-Bordoo-1.jpeg",
-        imagen2: "/productos/jeans-baggy-bolsillos-Bordoo-2.jpeg",
-        imagen3: "/productos/jeans-baggy-bolsillos-Bordoo-3.jpeg",
-        talles: "38",
     },
     {
         categoria: "Buzos",
@@ -325,14 +281,6 @@ export const productos = [
         precio: "$40.000",
         imagen: "/productos/buzo-over-boxing-club-1.jpeg",
         imagen2: "/productos/buzo-over-boxing-club-2.jpeg",
-        talles: "M",
-    },
-    {
-        categoria: "Buzos",
-        nombre: "Buzo Over Japon",
-        precio: "$40.000",
-        imagen: "/productos/buzo-over-japon-1.jpeg",
-        imagen2: "/productos/buzo-over-japon-2.jpeg",
         talles: "M",
     },
     {
@@ -535,14 +483,6 @@ export const productos = [
     },
     {
         categoria: "Remeras",
-        nombre: "Boxy New Life",
-        precio: "$24.000",
-        imagen: "/productos/boxy-new-life-1.jpeg",
-        imagen2: "/productos/boxy-new-life-2.jpeg",
-        talles: "L",
-    },
-    {
-        categoria: "Remeras",
         nombre: "Clasica Billabong",
         precio: "$22.000",
         imagen: "/productos/clasica-billabong-1.jpeg",
@@ -577,13 +517,6 @@ export const productos = [
         precio: "$18.000",
         imagen: "/productos/over-liso-white.jpeg",
         talles: "L",
-    },
-    {
-        categoria: "Remeras",
-        nombre: "Over Liso Color Petroleo",
-        precio: "$18.000",
-        imagen: "/productos/over-liso-color-petroleo.jpeg",
-        talles: "XXL",
     },
     {
         categoria: "Remeras",
@@ -779,7 +712,7 @@ export const productos = [
     {
         categoria: "Accesorios",
         nombre: "Fakhar Lattafa",
-        precio: "$24.000",
+        precio: "$30.000",
         imagen: "/productos/fakhar-latfafa-70-ml.jpeg",
         descripcion: "Fragancia arabe moderna con notas frescas, especiadas y amaderadas, 70ml.",
     },
@@ -810,13 +743,6 @@ export const productos = [
         precio: "$20.000",
         imagen: "/productos/rosed-ahar-100-ml.jpeg",
         descripcion: "Fragancia con notas florales y dulces que aportan frescura y personalidad,100ml.",
-    },
-    {
-        categoria: "Accesorios",
-        nombre: "Spicebomb Extreme",
-        precio: "$32.000",
-        imagen: "/productos/spicebomb-extreme-90-ml.jpeg",
-        descripcion: "Perfume intenso y seductor con notas especiadas, vainilla y tabaco,90ml.",
     },
     {
         categoria: "Accesorios",
@@ -877,13 +803,6 @@ export const productos = [
         precio: "$20.000",
         imagen: "/productos/reloj-digital-recistente-al-agua-gris.jpeg",
         descripcion: "Resistente al agua, sumergible hasta 10min",
-    },
-    {
-        categoria: "Accesorios",
-        nombre: "Reloj Retro Golden",
-        precio: "$16.000",
-        imagen: "/productos/reloj-retro-golden.jpeg",
-        descripcion: "",
     },
 ];
 
