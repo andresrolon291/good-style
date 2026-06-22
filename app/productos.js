@@ -718,13 +718,6 @@ export const productos = [
     },
     {
         categoria: "Accesorios",
-        nombre: "Body Splash 9 PM",
-        precio: "$20.000",
-        imagen: "/productos/boddy-splash-9-pm-250-ml.jpeg",
-        descripcion: "Aroma dulce y envolvente, ideal para quienes buscan destacar durante la noche,250ml.",
-    },
-    {
-        categoria: "Accesorios",
         nombre: "Ameerat Al Arab",
         precio: "$40.000",
         imagen: "/productos/ameerat-al-arab-ara-100-ml.jpeg",
@@ -743,6 +736,13 @@ export const productos = [
         precio: "$20.000",
         imagen: "/productos/rosed-ahar-100-ml.jpeg",
         descripcion: "Fragancia con notas florales y dulces que aportan frescura y personalidad,100ml.",
+    },
+    {
+        categoria: "Accesorios",
+        nombre: "Asad Black 100ml",
+        precio: "$38.000",
+        imagen: "/productos/asad-black.jpeg",
+        descripcion: "Lattafa - Asad Elixir: Un aroma nocturno e intenso. Huele a una explosión de especias picantes, maderas ricas, lavanda y un fondo ahumado de vainilla y ámbar. Seductor y con máxima fijación.",
     },
     {
         categoria: "Accesorios",
@@ -795,13 +795,6 @@ export const productos = [
         precio: "$20.000",
         imagen: "/productos/reloj-digital-recistente-al-agua-rojo-1.jpeg",
         imagen2: "/productos/reloj-digital-recistente-al-agua-rojo-2.jpeg",
-        descripcion: "Resistente al agua, sumergible hasta 10min",
-    },
-    {
-        categoria: "Accesorios",
-        nombre: "Reloj Digital Resistente al Agua gris",
-        precio: "$20.000",
-        imagen: "/productos/reloj-digital-recistente-al-agua-gris.jpeg",
         descripcion: "Resistente al agua, sumergible hasta 10min",
     },
 ];
