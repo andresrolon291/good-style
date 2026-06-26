@@ -34,13 +34,7 @@ export const productos = [
         imagen: "/productos/jogging-mom-chicago.jpeg",
         talles: "M",
     },
-    {
-        categoria: "Jeans",
-        nombre: "Baggy Celim",
-        precio: "$39.000",
-        imagen: "/productos/baggy-celim.jpeg",
-        talles: "44",
-    },
+    
     {
         categoria: "Jeans",
         nombre: "Baggy Nevado Gris",
@@ -238,14 +232,6 @@ export const productos = [
         imagen: "/productos/buzo-clasico-rip-curl-1.jpeg",
         imagen2: "/productos/buzo-clasico-rip-curl-2.jpeg",
         talles: "M",
-    },
-    {
-        categoria: "Buzos",
-        nombre: "Buzo Over Royals",
-        precio: "$40.000",
-        imagen: "/productos/buzo-over-royals-1.jpeg",
-        imagen2: "/productos/buzo-over-royals-2.jpeg",
-        talles: "S",
     },
     {
         categoria: "Buzos",
