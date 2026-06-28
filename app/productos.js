@@ -34,7 +34,13 @@ export const productos = [
         imagen: "/productos/jogging-mom-chicago.jpeg",
         talles: "M",
     },
-    
+    {
+        categoria: "Jeans",
+        nombre: "Baggy Celim",
+        precio: "$39.000",
+        imagen: "/productos/baggy-celim.jpeg",
+        talles: "44",
+    },
     {
         categoria: "Jeans",
         nombre: "Baggy Nevado Gris",
@@ -220,13 +226,6 @@ export const productos = [
     },
     {
         categoria: "Buzos",
-        nombre: "Buzo Clasico Driver Forever",
-        precio: "$40.000",
-        imagen: "/productos/buzo-clasico-driver-forever.jpeg",
-        talles: "M",
-    },
-    {
-        categoria: "Buzos",
         nombre: "Buzo Clasico Rip Curl",
         precio: "$40.000",
         imagen: "/productos/buzo-clasico-rip-curl-1.jpeg",
@@ -314,13 +313,6 @@ export const productos = [
         imagen: "/productos/buzo-over-stree-1.jpeg",
         imagen2: "/productos/buzo-over-stree-2.jpeg",
         talles: "S",
-    },
-    {
-        categoria: "Buzos",
-        nombre: "Sweter Waffle black",
-        precio: "$22.500",
-        imagen: "/productos/sweter-waffle-black.jpeg",
-        talles: "M",
     },
     {
         categoria: "Buzos",
@@ -819,13 +811,6 @@ export const productos = [
         nombre: "Gorro Boston",
         precio: "$14.500",
         imagen: "/productos/gorro-boston.jpeg",
-        descripcion: "Gorros de hilo con logo Bordoo.",
-    },
-    {
-        categoria: "Accesorios",
-        nombre: "Gorro Mate",
-        precio: "$14.500",
-        imagen: "/productos/gorro-mate.jpeg",
         descripcion: "Gorros de hilo con logo Bordoo.",
     },
     {
