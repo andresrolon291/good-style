@@ -106,9 +106,12 @@ export default function AdminPage() {
     }
 
     setProductos(prods);
-    guardarProductos(prods);
-    setForm(productoVacio);
-    setProductoEditando(null);
+guardarProductos(prods);
+
+window.dispatchEvent(new Event("productosActualizados"));
+
+setForm(productoVacio);
+setProductoEditando(null);
   };
 
   const editarProducto = (producto) => {
@@ -117,11 +120,14 @@ export default function AdminPage() {
     setForm({ ...producto });
   };
 
-  const borrarProducto = (id) => {
-    const prods = productos.filter((item) => item.id !== id);
-    setProductos(prods);
-    guardarProductos(prods);
-  };
+ const borrarProducto = (id) => {
+  const prods = productos.filter((item) => item.id !== id);
+
+  setProductos(prods);
+  guardarProductos(prods);
+
+  window.dispatchEvent(new Event("productosActualizados"));
+};
 
   const manejarArchivo = (event) => {
     const archivo = event.target.files?.[0];
