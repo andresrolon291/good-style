@@ -17,7 +17,7 @@ export const productos = [
         categoria: "Jeans",
         nombre: "Baggy Localizado Oscuro",
         precio: "$39.000",
-        imagen: "/productos/baggy-localizado-osc.jpeg",
+        imagen: "/productos/Baggy-localizado-osc.jpeg",
         talles: "40,42",
     },
     {
@@ -851,7 +851,7 @@ export const productos = [
     },
     {
         categoria: "Accesorios",
-        nombre: "Sapphire Sky",
+        nombre: "Sapphire Sky 100ml",
         precio: "$35.000",
         imagen: "/productos/sapphire-sky.jpeg",
         descripcion: "100ml.",
@@ -915,6 +915,16 @@ export const productos = [
         precio: "$20.000",
         imagen: "/productos/reloj-analogico.jpeg",
         descripcion: "malla metalica",
+    },
+    {
+        categoria: "Accesorios",
+        nombre: "Cintos",
+        precio: "$15.000",
+        imagen: "/productos/cinto 1.jpeg",
+        imagen2: "/productos/cinto 2.jpeg",
+        imagen3: "/productos/cinto 3.jpeg",
+        imagen4: "/productos/cinto 4.jpeg",
+        descripcion: "Cintos de cuero con hebilla metalica.",
     },
 ];
 
