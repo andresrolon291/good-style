@@ -45,7 +45,7 @@ export const productos = [
         categoria: "Jeans",
         nombre: "Semy Baggy Gris Carbon",
         precio: "$39.000",
-        imagen: "/productos/semi-baggy-gris-carbon.jpeg",
+        imagen: "/productos/Semi-baggy-gris-Carbon.jpeg",
         talles: "38,40",
     },
      {
@@ -59,7 +59,7 @@ export const productos = [
         categoria: "Jeans",
         nombre: "Semy Baggy Rasgado",
         precio: "$39.000",
-        imagen: "/productos/Semi-Baggy-rasgado.jpeg",
+        imagen: "/productos/Semi-baggy-rasgado.jpeg",
         talles: "38",
     },
      {
@@ -227,8 +227,8 @@ export const productos = [
         categoria: "Jeans",
         nombre: "Baggy Bolsillos Bordados",
         precio: "$39.000",
-        imagen: "/productos/baggy-bolsillos-Bordados-1.jpeg",
-        imagen2: "/productos/baggy-bolsillos-Bordados-2.jpeg",
+        imagen: "/productos/baggy-bolsillos-bordados-1.jpeg",
+        imagen2: "/productos/baggy-bolsillos-bordados-2.jpeg",
         talles: "40",
     },
     {
@@ -802,13 +802,6 @@ export const productos = [
     },
     {
         categoria: "Accesorios",
-        nombre: "Old Body Spray Fakhar",
-        precio: "$15.000",
-        imagen: "/productos/old-body-spray-fakhar-200-ml.jpeg",
-        descripcion: "Body spray refrescante con aroma masculino intenso y excelente duracion, 200ml.",
-    },
-    {
-        categoria: "Accesorios",
         nombre: "Fakhar Lattafa",
         precio: "$30.000",
         imagen: "/productos/fakhar-latfafa-70-ml.jpeg",
@@ -883,15 +876,6 @@ export const productos = [
         precio: "$14.500",
         imagen: "/productos/gorro-new-orleans.jpeg",
         descripcion: "Gorros de hilo con logo Bordoo.",
-    },
-    {
-        categoria: "Accesorios",
-        nombre: "Reloj Digital Sport",
-        precio: "$14.500",
-        imagen: "/productos/reloj-digital-1.jpeg",
-        imagen2: "/productos/reloj-digital-2.jpeg",
-        imagen3: "/productos/reloj-digital-3.jpeg",
-        descripcion: ".",
     },
     {
         categoria: "Accesorios",
