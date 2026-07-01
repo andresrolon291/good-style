@@ -81,19 +81,31 @@ export default function AdminPage() {
   const guardar = (event) => {
     event.preventDefault();
 
-    if (!form.nombre.trim() || !form.precio.trim()) {
+    const nombreInput = event.currentTarget.querySelector('input[placeholder="Nombre"]');
+    const precioInput = event.currentTarget.querySelector('input[placeholder="Precio"]');
+    const categoriaInput = event.currentTarget.querySelector('select');
+    const tallesInput = event.currentTarget.querySelector('input[placeholder="Talles (ej: 38, 40, 42)"]');
+    const imagenInput = event.currentTarget.querySelector('input[placeholder="URL o base64 de imagen"]');
+    const descripcionInput = event.currentTarget.querySelector('textarea[placeholder="Descripción"]');
+
+    const nombre = nombreInput?.value?.trim() ?? "";
+    const precio = precioInput?.value?.trim() ?? "";
+
+    console.log("guardar debug", { nombre, precio, form, categoria: categoriaInput?.value, talles: tallesInput?.value, imagen: imagenInput?.value, descripcion: descripcionInput?.value });
+
+    if (!nombre || !precio) {
       alert("Completá al menos nombre y precio");
       return;
     }
 
     const productoFinal = {
       ...form,
-      nombre: form.nombre.trim(),
-      precio: form.precio.trim(),
-      categoria: form.categoria || "Jeans",
-      talles: form.talles.trim(),
-      descripcion: form.descripcion.trim(),
-      imagen: form.imagen.trim(),
+      nombre,
+      precio,
+      categoria: categoriaInput?.value || "Jeans",
+      talles: tallesInput?.value?.trim() ?? "",
+      descripcion: descripcionInput?.value?.trim() ?? "",
+      imagen: imagenInput?.value?.trim() ?? "",
     };
 
     let prods;
@@ -105,13 +117,12 @@ export default function AdminPage() {
       prods = [{ ...productoFinal, id: Date.now() }, ...productos];
     }
 
+    console.log("guardar prods", prods);
     setProductos(prods);
-guardarProductos(prods);
+    guardarProductos(prods);
 
-window.dispatchEvent(new Event("productosActualizados"));
-
-setForm(productoVacio);
-setProductoEditando(null);
+    setForm(productoVacio);
+    setProductoEditando(null);
   };
 
   const editarProducto = (producto) => {

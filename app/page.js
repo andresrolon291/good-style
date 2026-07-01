@@ -101,10 +101,18 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        const actualizar = () => setProductos(getProductosPersistidos());
-        window.addEventListener("productosActualizados", actualizar);
-        return () => window.removeEventListener("productosActualizados", actualizar);
-    }, []);
+    const actualizar = () => {
+        setProductos(getProductosPersistidos());
+    };
+
+    window.addEventListener("productosActualizados", actualizar);
+    window.addEventListener("storage", actualizar);
+
+    return () => {
+        window.removeEventListener("productosActualizados", actualizar);
+        window.removeEventListener("storage", actualizar);
+    };
+}, []);
 
     useEffect(() => {
         const manejarPromos = () => {
