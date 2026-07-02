@@ -177,6 +177,11 @@ export default function Home() {
             label: "Accesorios",
             imagen: productosConId.find((item) => item.categoria === "Accesorios" && item.imagen)?.imagen || "/productos/reloj-digital-1.jpeg",
         },
+        {
+    nombre: "Zapatillas",
+    label: "Zapatillas",
+    imagen: productosConId.find((item) => item.categoria === "Zapatillas" && item.imagen)?.imagen || "/productos/zapatillas.jpeg",
+},
     ];
 
     return (
@@ -280,7 +285,7 @@ export default function Home() {
                 </div>
 
                 <div className="toolbar">
-                    {['Todos', 'Jeans', 'Buzos', 'Remeras', 'Accesorios'].map((categoria) => (
+                    {['Todos', 'Jeans', 'Buzos', 'Remeras', 'Accesorios', 'Zapatillas'].map((categoria) => (
                         <button
                             key={categoria}
                             className={`chip ${categoriaSeleccionada === categoria ? "active" : ""}`}

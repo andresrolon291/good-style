@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { getProductosPersistidos, guardarProductos } from "../productosStore";
 
-const categorias = ["Jeans", "Buzos", "Remeras", "Accesorios"];
+const categorias = ["Jeans", "Buzos", "Remeras", "Accesorios", "Zapatillas"];
 const ADMIN_USER = "admin";
 const ADMIN_PASS = "goodstyle2026";
 

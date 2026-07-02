@@ -92,6 +92,13 @@ export const productos = [
     },
     {
         categoria: "Jeans",
+        nombre: "Jogging Recto",
+        precio: "$30.000",
+        imagen: "/productos/joggin-recto-negro.jpeg",
+        talles: "3,4",
+    },
+    {
+        categoria: "Jeans",
         nombre: "Baggy Celim",
         precio: "$39.000",
         imagen: "/productos/baggy-celim.jpeg",
@@ -845,6 +852,21 @@ export const productos = [
         imagen: "/productos/asad-chocolate.jpeg",
         descripcion: "100ml.",
     },
+     {
+        categoria: "Accesorios",
+        nombre: "Perfume Toscano",
+        precio: "$38.500",
+        imagen: "/productos/perf-toscano.jpeg",
+        descripcion: "80ml.",
+    },
+    {
+        categoria: "Accesorios",
+        nombre: "Perfume Velvet",
+        precio: "$28.500",
+        imagen: "/productos/perf-velvet.jpeg",
+        imagen2: "/productos/perf-velvet-2.jpeg",
+        descripcion: "80ml.",
+    },
     {
         categoria: "Accesorios",
         nombre: "Fakhar Lattafa",
@@ -954,6 +976,15 @@ export const productos = [
         imagen3: "/productos/cinto 3.jpeg",
         imagen4: "/productos/cinto 4.jpeg",
         descripcion: "Cintos de cuero con hebilla metalica.",
+    },
+     {
+        categoria: "Zapatillas",
+        nombre: "Adidas Forum Black",
+        precio: "$70.000",
+        imagen: "/productos sneakers/adidas-forum-black.jpeg",
+        imagen2: "/productos sneakers/adidas-forum-black-1.jpeg",
+        imagen3: "/productos sneakers/adidas-forum-black-2.jpeg",
+        talles: "38,40.",
     },
 ];
 
