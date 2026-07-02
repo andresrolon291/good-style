@@ -180,7 +180,7 @@ export default function Home() {
         {
     nombre: "Zapatillas",
     label: "Zapatillas",
-    imagen: productosConId.find((item) => item.categoria === "Zapatillas" && item.imagen)?.imagen || "/productos/zapatillas.jpeg",
+    imagen: productosConId.find((item) => item.categoria === "Zapatillas" && item.imagen)?.imagen || "/productos sneakers/nike-sb-black.jpeg",
 },
     ];
 
