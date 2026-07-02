@@ -16,6 +16,22 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Panel admin con Supabase
+
+El panel esta en `/admin`. Para que productos y promos se vean desde cualquier dispositivo:
+
+1. Crea un proyecto en Supabase.
+2. Ejecuta el contenido de `supabase.sql` en el SQL editor de Supabase.
+3. Copia `.env.example` a `.env.local` y completa:
+   - `SUPABASE_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `ADMIN_USER`
+   - `ADMIN_PASS`
+4. En Vercel, carga esas mismas variables en Project Settings > Environment Variables.
+5. Entra a `/admin`, inicia sesion y usa `Importar catalogo base` una sola vez para cargar los productos actuales.
+
+La tienda lee el catalogo desde `/api/catalog`. Si Supabase no esta configurado, muestra el catalogo base para que la pagina no quede vacia.
+
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.

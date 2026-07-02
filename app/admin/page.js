@@ -1,17 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { getProductosPersistidos, guardarProductos } from "../productosStore";
 
-const categorias = ["Jeans", "Buzos", "Remeras", "Accesorios", "Zapatillas"];
-const ADMIN_USER = "admin";
-const ADMIN_PASS = "goodstyle2026";
+const CATEGORIAS = ["Jeans", "Buzos", "Remeras", "Accesorios", "Zapatillas"];
+const ORDEN_TALLES = ["S", "M", "L", "XL", "XXL", "36", "37", "38", "39", "40", "41", "42", "44", "46"];
+const AUTH_KEY = "goodStyleAdminAuth";
 
 const productoVacio = {
   categoria: "Jeans",
   nombre: "",
   precio: "",
   imagen: "",
+  imagen2: "",
+  imagen3: "",
+  imagen4: "",
   talles: "",
   descripcion: "",
 };
@@ -23,166 +25,320 @@ const promoVacio = {
   activa: true,
 };
 
+function authHeader(token) {
+  return {
+    Authorization: `Basic ${token}`,
+    "Content-Type": "application/json",
+  };
+}
+
+function crearToken(usuario, password) {
+  return btoa(`${usuario}:${password}`);
+}
+
+function normalizarPrecio(precio) {
+  const limpio = String(precio).trim();
+  if (!limpio) return "";
+  if (limpio.startsWith("$")) return limpio;
+
+  const soloNumeros = limpio.replace(/[^0-9]/g, "");
+  if (!soloNumeros) return limpio;
+
+  return `$${Number(soloNumeros).toLocaleString("es-AR")}`;
+}
+
+function normalizarTalles(talles) {
+  return String(talles)
+    .split(",")
+    .map((talle) => talle.trim().replace(".", "").toUpperCase())
+    .filter(Boolean)
+    .join(", ");
+}
+
+function obtenerTalles(producto) {
+  return producto.talles
+    ? producto.talles.split(",").map((talle) => talle.trim().replace(".", "").toUpperCase()).filter(Boolean)
+    : [];
+}
+
+function obtenerImagenes(producto) {
+  return [producto.imagen, producto.imagen2, producto.imagen3, producto.imagen4].filter(Boolean);
+}
+
+async function leerRespuesta(response) {
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.error || "No se pudo completar la accion");
+  }
+  return data;
+}
+
 export default function AdminPage() {
   const [productos, setProductos] = useState([]);
-  const [productoEditando, setProductoEditando] = useState(null);
-  const [form, setForm] = useState(productoVacio);
-  const [autenticado, setAutenticado] = useState(false);
-  const [loginData, setLoginData] = useState({ usuario: "", password: "" });
-  const [errorLogin, setErrorLogin] = useState("");
   const [promos, setPromos] = useState([]);
+  const [productoEditando, setProductoEditando] = useState(null);
   const [promoEditando, setPromoEditando] = useState(null);
+  const [form, setForm] = useState(productoVacio);
   const [promoForm, setPromoForm] = useState(promoVacio);
-  const [vistaActiva, setVistaActiva] = useState("prendas");
+  const [autenticado, setAutenticado] = useState(false);
+  const [token, setToken] = useState("");
+  const [loginData, setLoginData] = useState({ usuario: "", password: "" });
+  const [mensaje, setMensaje] = useState("");
+  const [error, setError] = useState("");
+  const [cargando, setCargando] = useState(true);
+  const [guardando, setGuardando] = useState(false);
+  const [vistaActiva, setVistaActiva] = useState("productos");
   const [categoriaAdmin, setCategoriaAdmin] = useState("Todos");
   const [talleAdmin, setTalleAdmin] = useState("Todos");
 
-  useEffect(() => {
-    const datos = getProductosPersistidos();
-    setProductos(datos);
+  const cargarCatalogo = async () => {
+    setError("");
+    try {
+      const response = await fetch("/api/catalog", { cache: "no-store" });
+      const data = await leerRespuesta(response);
+      setProductos(data.productos || []);
+      setPromos(data.promos || []);
 
-    const authGuardado = window.localStorage.getItem("goodStyleAdminAuth");
-    if (authGuardado === "true") {
+      if (!data.configured) {
+        setMensaje("Modo respaldo: falta configurar Supabase. La pagina muestra el catalogo base, pero el admin no puede guardar cambios compartidos todavia.");
+      } else if (data.source === "fallback") {
+        setMensaje("Supabase esta configurado, pero la tabla de productos esta vacia. Usa 'Importar catalogo base' una vez.");
+      } else {
+        setMensaje("");
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setCargando(false);
+    }
+  };
+
+  useEffect(() => {
+    const tokenGuardado = localStorage.getItem(AUTH_KEY);
+    if (tokenGuardado) {
+      setToken(tokenGuardado);
       setAutenticado(true);
     }
 
-    const promosGuardados = window.localStorage.getItem("goodStylePromos");
-    if (promosGuardados) {
-      setPromos(JSON.parse(promosGuardados));
-    }
+    cargarCatalogo();
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("goodStylePromos", JSON.stringify(promos));
-      window.dispatchEvent(new Event("promosActualizadas"));
-    }
-  }, [promos]);
-
-  const iniciarSesion = (event) => {
+  const iniciarSesion = async (event) => {
     event.preventDefault();
+    setError("");
+    setMensaje("");
 
-    if (loginData.usuario === ADMIN_USER && loginData.password === ADMIN_PASS) {
-      window.localStorage.setItem("goodStyleAdminAuth", "true");
+    try {
+      const response = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
+      });
+
+      await leerRespuesta(response);
+      const nuevoToken = crearToken(loginData.usuario, loginData.password);
+      localStorage.setItem(AUTH_KEY, nuevoToken);
+      setToken(nuevoToken);
       setAutenticado(true);
-      setErrorLogin("");
-      return;
+      setLoginData({ usuario: "", password: "" });
+      setMensaje("Sesion iniciada.");
+    } catch (err) {
+      setError(err.message);
     }
-
-    setErrorLogin("Usuario o contraseña incorrectos");
   };
 
   const cerrarSesion = () => {
-    window.localStorage.removeItem("goodStyleAdminAuth");
+    localStorage.removeItem(AUTH_KEY);
     setAutenticado(false);
+    setToken("");
     setLoginData({ usuario: "", password: "" });
   };
 
-  const guardar = (event) => {
+  const guardarProducto = async (event) => {
     event.preventDefault();
-
-    const nombreInput = event.currentTarget.querySelector('input[placeholder="Nombre"]');
-    const precioInput = event.currentTarget.querySelector('input[placeholder="Precio"]');
-    const categoriaInput = event.currentTarget.querySelector('select');
-    const tallesInput = event.currentTarget.querySelector('input[placeholder="Talles (ej: 38, 40, 42)"]');
-    const imagenInput = event.currentTarget.querySelector('input[placeholder="URL o base64 de imagen"]');
-    const descripcionInput = event.currentTarget.querySelector('textarea[placeholder="Descripción"]');
-
-    const nombre = nombreInput?.value?.trim() ?? "";
-    const precio = precioInput?.value?.trim() ?? "";
-
-    console.log("guardar debug", { nombre, precio, form, categoria: categoriaInput?.value, talles: tallesInput?.value, imagen: imagenInput?.value, descripcion: descripcionInput?.value });
-
-    if (!nombre || !precio) {
-      alert("Completá al menos nombre y precio");
-      return;
-    }
+    setError("");
+    setMensaje("");
 
     const productoFinal = {
       ...form,
-      nombre,
-      precio,
-      categoria: categoriaInput?.value || "Jeans",
-      talles: tallesInput?.value?.trim() ?? "",
-      descripcion: descripcionInput?.value?.trim() ?? "",
-      imagen: imagenInput?.value?.trim() ?? "",
+      id: productoEditando?.id || form.id,
+      nombre: form.nombre.trim(),
+      precio: normalizarPrecio(form.precio),
+      talles: normalizarTalles(form.talles),
+      descripcion: form.descripcion.trim(),
+      imagen: form.imagen.trim(),
+      imagen2: form.imagen2.trim(),
+      imagen3: form.imagen3.trim(),
+      imagen4: form.imagen4.trim(),
     };
 
-    let prods;
-    if (productoEditando) {
-      prods = productos.map((item) =>
-        item.id === productoEditando.id ? { ...item, ...productoFinal } : item
-      );
-    } else {
-      prods = [{ ...productoFinal, id: Date.now() }, ...productos];
+    if (!productoFinal.nombre || !productoFinal.precio) {
+      setError("Completa al menos nombre y precio.");
+      return;
     }
 
-    console.log("guardar prods", prods);
-    setProductos(prods);
-    guardarProductos(prods);
+    setGuardando(true);
+    try {
+      const response = await fetch("/api/admin/productos", {
+        method: "POST",
+        headers: authHeader(token),
+        body: JSON.stringify({ producto: productoFinal }),
+      });
 
-    setForm(productoVacio);
-    setProductoEditando(null);
+      const data = await leerRespuesta(response);
+      setProductos((prev) => {
+        const existe = prev.some((item) => item.id === data.producto.id);
+        if (existe) {
+          return prev.map((item) => (item.id === data.producto.id ? data.producto : item));
+        }
+        return [data.producto, ...prev];
+      });
+      setForm(productoVacio);
+      setProductoEditando(null);
+      setVistaActiva("productos");
+      setMensaje("Producto guardado. La pagina publica lo va a reflejar al recargar o automaticamente en unos segundos.");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setGuardando(false);
+    }
+  };
+
+  const borrarProductoAdmin = async (id) => {
+    if (!confirm("Seguro que queres borrar este producto?")) return;
+
+    setError("");
+    setMensaje("");
+    try {
+      const response = await fetch(`/api/admin/productos?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+        headers: authHeader(token),
+      });
+
+      await leerRespuesta(response);
+      setProductos((prev) => prev.filter((item) => item.id !== id));
+      setMensaje("Producto borrado.");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const importarCatalogoBase = async () => {
+    if (!confirm("Esto carga el catalogo base en Supabase. Los productos con el mismo id se actualizan. Continuar?")) return;
+
+    setError("");
+    setMensaje("");
+    setGuardando(true);
+    try {
+      const response = await fetch("/api/admin/productos", {
+        method: "POST",
+        headers: authHeader(token),
+        body: JSON.stringify({ action: "importar-base" }),
+      });
+
+      const data = await leerRespuesta(response);
+      setProductos(data.productos || []);
+      setMensaje(`Catalogo base importado (${data.total} productos).`);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setGuardando(false);
+    }
   };
 
   const editarProducto = (producto) => {
-    setVistaActiva("prendas");
     setProductoEditando(producto);
     setForm({ ...producto });
+    setVistaActiva("editar");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
- const borrarProducto = (id) => {
-  const prods = productos.filter((item) => item.id !== id);
+  const cancelarProducto = () => {
+    setProductoEditando(null);
+    setForm(productoVacio);
+    setVistaActiva("productos");
+  };
 
-  setProductos(prods);
-  guardarProductos(prods);
-
-  window.dispatchEvent(new Event("productosActualizados"));
-};
-
-  const manejarArchivo = (event) => {
+  const manejarArchivo = (event, campo) => {
     const archivo = event.target.files?.[0];
     if (!archivo) return;
 
     const lector = new FileReader();
     lector.onload = () => {
-      setForm((prev) => ({ ...prev, imagen: lector.result }));
+      setForm((prev) => ({ ...prev, [campo]: lector.result }));
     };
     lector.readAsDataURL(archivo);
   };
 
-  const guardarPromo = (event) => {
+  const guardarPromoAdmin = async (event) => {
     event.preventDefault();
+    setError("");
+    setMensaje("");
 
-    if (!promoForm.titulo.trim() || !promoForm.descuento) {
-      alert("Completá el título y el descuento");
+    const promoFinal = {
+      ...promoForm,
+      id: promoEditando?.id || promoForm.id,
+      titulo: promoForm.titulo.trim(),
+      texto: promoForm.texto.trim(),
+      descuento: String(promoForm.descuento).trim(),
+      activa: Boolean(promoForm.activa),
+    };
+
+    if (!promoFinal.titulo || !promoFinal.descuento) {
+      setError("Completa el titulo y el descuento.");
       return;
     }
 
-    if (promoEditando) {
-      setPromos((prev) =>
-        prev.map((promo) =>
-          promo.id === promoEditando.id ? { ...promo, ...promoForm, titulo: promoForm.titulo.trim(), texto: promoForm.texto.trim(), descuento: promoForm.descuento } : promo
-        )
-      );
-    } else {
-      setPromos((prev) => [
-        { id: Date.now(), ...promoForm, titulo: promoForm.titulo.trim(), texto: promoForm.texto.trim(), descuento: promoForm.descuento },
-        ...prev,
-      ]);
-    }
+    setGuardando(true);
+    try {
+      const response = await fetch("/api/admin/promos", {
+        method: "POST",
+        headers: authHeader(token),
+        body: JSON.stringify({ promo: promoFinal }),
+      });
 
-    setPromoForm(promoVacio);
-    setPromoEditando(null);
+      const data = await leerRespuesta(response);
+      setPromos((prev) => {
+        const existe = prev.some((promo) => promo.id === data.promo.id);
+        if (existe) {
+          return prev.map((promo) => (promo.id === data.promo.id ? data.promo : promo));
+        }
+        return [data.promo, ...prev];
+      });
+      setPromoForm(promoVacio);
+      setPromoEditando(null);
+      setMensaje("Promo guardada.");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setGuardando(false);
+    }
+  };
+
+  const borrarPromoAdmin = async (id) => {
+    if (!confirm("Seguro que queres borrar esta promo?")) return;
+
+    setError("");
+    setMensaje("");
+    try {
+      const response = await fetch(`/api/admin/promos?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+        headers: authHeader(token),
+      });
+
+      await leerRespuesta(response);
+      setPromos((prev) => prev.filter((promo) => promo.id !== id));
+      setMensaje("Promo borrada.");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const editarPromo = (promo) => {
     setPromoEditando(promo);
     setPromoForm({ ...promo });
-  };
-
-  const borrarPromo = (id) => {
-    setPromos((prev) => prev.filter((promo) => promo.id !== id));
+    setVistaActiva("promos");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const productosOrdenados = useMemo(() => {
@@ -191,114 +347,125 @@ export default function AdminPage() {
 
   const productosFiltradosAdmin = useMemo(() => {
     return productosOrdenados.filter((producto) => {
-      const coincideCategoria =
-        categoriaAdmin === "Todos" || producto.categoria === categoriaAdmin;
-
-      const tallesProducto = producto.talles
-        ? producto.talles.split(",").map((talle) => talle.trim().toUpperCase())
-        : [];
-
-      const coincideTalle =
-        talleAdmin === "Todos" || tallesProducto.includes(talleAdmin);
-
+      const coincideCategoria = categoriaAdmin === "Todos" || producto.categoria === categoriaAdmin;
+      const tallesProducto = obtenerTalles(producto);
+      const coincideTalle = talleAdmin === "Todos" || tallesProducto.includes(talleAdmin);
       return coincideCategoria && coincideTalle;
     });
   }, [categoriaAdmin, productosOrdenados, talleAdmin]);
 
-  const ordenTalles = ["S", "M", "L", "XL", "XXL", "38", "40", "42", "44", "46"];
-  const tallesDisponibles = [
-    "Todos",
-    ...[...new Set(
-      productosOrdenados.flatMap((producto) =>
-        producto.talles
-          ? producto.talles.split(",").map((talle) => talle.trim().toUpperCase())
-          : []
-      )
-    )].sort((a, b) => {
-      const posicionA = ordenTalles.indexOf(a);
-      const posicionB = ordenTalles.indexOf(b);
+  const tallesDisponibles = useMemo(() => {
+    const talles = productosOrdenados.flatMap(obtenerTalles);
 
-      if (posicionA === -1 && posicionB === -1) {
-        return a.localeCompare(b, "es-AR", { numeric: true });
-      }
+    return [
+      "Todos",
+      ...[...new Set(talles)].sort((a, b) => {
+        const posicionA = ORDEN_TALLES.indexOf(a);
+        const posicionB = ORDEN_TALLES.indexOf(b);
 
-      if (posicionA === -1) return 1;
-      if (posicionB === -1) return -1;
+        if (posicionA === -1 && posicionB === -1) {
+          return a.localeCompare(b, "es-AR", { numeric: true });
+        }
 
-      return posicionA - posicionB;
-    }),
-  ];
+        if (posicionA === -1) return 1;
+        if (posicionB === -1) return -1;
+
+        return posicionA - posicionB;
+      }),
+    ];
+  }, [productosOrdenados]);
 
   if (!autenticado) {
     return (
-      <main style={{ maxWidth: "420px", margin: "40px auto", padding: "24px", fontFamily: "Arial, sans-serif" }}>
-        <h1 style={{ color: "#2f8f46", marginBottom: "8px" }}>Acceso administrador</h1>
-        <p style={{ color: "#555", marginBottom: "16px" }}>Ingresá tus credenciales para administrar los productos.</p>
+      <main style={adminPageStyle}>
+        <section style={{ ...panelStyle, maxWidth: "440px", margin: "40px auto" }}>
+          <h1 style={titleStyle}>Acceso administrador</h1>
+          <p style={mutedStyle}>Ingresa tus credenciales para administrar productos y promos.</p>
 
-        <form onSubmit={iniciarSesion} style={{ background: "#f8fff8", border: "1px solid #d8f0d8", padding: "16px", borderRadius: "12px" }}>
-          <input
-            value={loginData.usuario}
-            onChange={(e) => setLoginData({ ...loginData, usuario: e.target.value })}
-            placeholder="Usuario"
-            style={inputStyle}
-          />
-          <input
-            type="password"
-            value={loginData.password}
-            onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-            placeholder="Contraseña"
-            style={{ ...inputStyle, marginTop: "10px" }}
-          />
-          {errorLogin && <p style={{ color: "#d9534f", marginTop: "8px" }}>{errorLogin}</p>}
-          <button type="submit" style={{ ...botonVerde, width: "100%", marginTop: "12px" }}>Entrar</button>
-        </form>
+          <form onSubmit={iniciarSesion} style={{ display: "grid", gap: "10px", marginTop: "16px" }}>
+            <input
+              value={loginData.usuario}
+              onChange={(event) => setLoginData({ ...loginData, usuario: event.target.value })}
+              placeholder="Usuario"
+              autoComplete="username"
+              style={inputStyle}
+            />
+            <input
+              type="password"
+              value={loginData.password}
+              onChange={(event) => setLoginData({ ...loginData, password: event.target.value })}
+              placeholder="Contrasena"
+              autoComplete="current-password"
+              style={inputStyle}
+            />
+            {error && <p style={errorStyle}>{error}</p>}
+            <button type="submit" style={botonVerde}>Entrar</button>
+          </form>
+        </section>
       </main>
     );
   }
 
   return (
-    <main style={{ maxWidth: "1200px", margin: "0 auto", padding: "24px", fontFamily: "Arial, sans-serif" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+    <main style={adminPageStyle}>
+      <header style={headerStyle}>
         <div>
-          <h1 style={{ color: "#2f8f46", marginBottom: "4px" }}>Panel de administración</h1>
-          <p style={{ color: "#555", margin: 0 }}>Gestioná prendas, promos y descuentos desde un solo lugar.</p>
+          <h1 style={titleStyle}>Panel de administracion</h1>
+          <p style={mutedStyle}>Gestiona productos y promos desde cualquier dispositivo.</p>
         </div>
-        <button onClick={cerrarSesion} style={botonGris}>Salir</button>
-      </div>
+        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          <button onClick={cargarCatalogo} style={botonGris}>Actualizar</button>
+          <button onClick={cerrarSesion} style={botonGris}>Salir</button>
+        </div>
+      </header>
 
-      <div style={{ display: "flex", gap: "10px", marginBottom: "16px", flexWrap: "wrap" }}>
-        <button onClick={() => setVistaActiva("prendas")} style={vistaActiva === "prendas" ? botonVerde : botonGris}>Agregar prendas</button>
-        <button onClick={() => setVistaActiva("promos")} style={vistaActiva === "promos" ? botonVerde : botonGris}>Descuentos</button>
+      {mensaje && <div style={noticeStyle}>{mensaje}</div>}
+      {error && <div style={errorBoxStyle}>{error}</div>}
+
+      <nav style={tabsStyle}>
         <button onClick={() => setVistaActiva("productos")} style={vistaActiva === "productos" ? botonVerde : botonGris}>Productos</button>
-      </div>
+        <button onClick={() => { setVistaActiva("editar"); setProductoEditando(null); setForm(productoVacio); }} style={vistaActiva === "editar" ? botonVerde : botonGris}>Agregar producto</button>
+        <button onClick={() => setVistaActiva("promos")} style={vistaActiva === "promos" ? botonVerde : botonGris}>Promos</button>
+        <button onClick={importarCatalogoBase} disabled={guardando} style={botonGris}>Importar catalogo base</button>
+      </nav>
 
-      {vistaActiva === "prendas" && (
+      {vistaActiva === "editar" && (
         <section style={panelStyle}>
-          <h2 style={{ marginTop: 0 }}>Agregar o editar prenda</h2>
-          <form onSubmit={guardar}>
-            <div style={{ display: "grid", gap: "12px" }}>
-              <input value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} placeholder="Nombre" style={inputStyle} />
-              <input value={form.precio} onChange={(e) => setForm({ ...form, precio: e.target.value })} placeholder="Precio" style={inputStyle} />
-              <select value={form.categoria} onChange={(e) => setForm({ ...form, categoria: e.target.value })} style={inputStyle}>
-                {categorias.map((categoria) => (
+          <h2 style={{ marginTop: 0 }}>{productoEditando ? "Editar producto" : "Agregar producto"}</h2>
+          <form onSubmit={guardarProducto}>
+            <div style={formGridStyle}>
+              <input value={form.nombre} onChange={(event) => setForm({ ...form, nombre: event.target.value })} placeholder="Nombre" style={inputStyle} />
+              <input value={form.precio} onChange={(event) => setForm({ ...form, precio: event.target.value })} placeholder="Precio, ej: 39000" inputMode="numeric" style={inputStyle} />
+              <select value={form.categoria} onChange={(event) => setForm({ ...form, categoria: event.target.value })} style={inputStyle}>
+                {CATEGORIAS.map((categoria) => (
                   <option key={categoria} value={categoria}>{categoria}</option>
                 ))}
               </select>
-              <input value={form.talles} onChange={(e) => setForm({ ...form, talles: e.target.value })} placeholder="Talles (ej: 38, 40, 42)" style={inputStyle} />
-              <input value={form.imagen} onChange={(e) => setForm({ ...form, imagen: e.target.value })} placeholder="URL o base64 de imagen" style={inputStyle} />
-              <input type="file" accept="image/*" onChange={manejarArchivo} style={inputStyle} />
-              {form.imagen && (
-                <div style={{ border: "1px solid #d8f0d8", padding: "8px", borderRadius: "8px", background: "#fff" }}>
-                  <img src={form.imagen} alt="Vista previa" style={{ width: "140px", height: "140px", objectFit: "cover", borderRadius: "8px" }} />
-                </div>
-              )}
-              <textarea value={form.descripcion} onChange={(e) => setForm({ ...form, descripcion: e.target.value })} placeholder="Descripción" style={{ ...inputStyle, minHeight: "80px" }} />
+              <input value={form.talles} onChange={(event) => setForm({ ...form, talles: event.target.value })} placeholder="Talles, ej: 38, 40, 42" style={inputStyle} />
+              <textarea value={form.descripcion} onChange={(event) => setForm({ ...form, descripcion: event.target.value })} placeholder="Descripcion" style={{ ...inputStyle, minHeight: "80px" }} />
             </div>
-            <div style={{ display: "flex", gap: "10px", marginTop: "12px" }}>
-              <button type="submit" style={botonVerde}>Guardar</button>
-              {productoEditando && (
-                <button type="button" onClick={() => { setProductoEditando(null); setForm(productoVacio); }} style={botonGris}>Cancelar</button>
-              )}
+
+            <div style={{ display: "grid", gap: "12px", marginTop: "14px" }}>
+              {["imagen", "imagen2", "imagen3", "imagen4"].map((campo, index) => (
+                <div key={campo} style={imageFieldStyle}>
+                  <div>
+                    <label style={labelStyle}>Imagen {index + 1}</label>
+                    <input
+                      value={form[campo] || ""}
+                      onChange={(event) => setForm({ ...form, [campo]: event.target.value })}
+                      placeholder="URL o imagen cargada"
+                      style={inputStyle}
+                    />
+                    <input type="file" accept="image/*" onChange={(event) => manejarArchivo(event, campo)} style={{ ...inputStyle, marginTop: "8px" }} />
+                  </div>
+                  {form[campo] && <img src={form[campo]} alt={`Vista previa ${index + 1}`} style={previewStyle} />}
+                </div>
+              ))}
+            </div>
+
+            <div style={actionsStyle}>
+              <button type="submit" disabled={guardando} style={botonVerde}>{guardando ? "Guardando..." : "Guardar producto"}</button>
+              <button type="button" onClick={cancelarProducto} style={botonGris}>Cancelar</button>
             </div>
           </form>
         </section>
@@ -306,37 +473,38 @@ export default function AdminPage() {
 
       {vistaActiva === "promos" && (
         <section style={panelStyle}>
-          <h2 style={{ marginTop: 0 }}>Descuentos y promos</h2>
-          <form onSubmit={guardarPromo}>
-            <div style={{ display: "grid", gap: "10px" }}>
-              <input value={promoForm.titulo} onChange={(e) => setPromoForm({ ...promoForm, titulo: e.target.value })} placeholder="Título de la promo" style={inputStyle} />
-              <textarea value={promoForm.texto} onChange={(e) => setPromoForm({ ...promoForm, texto: e.target.value })} placeholder="Texto de la promoción" style={{ ...inputStyle, minHeight: "70px" }} />
-              <input type="number" value={promoForm.descuento} onChange={(e) => setPromoForm({ ...promoForm, descuento: e.target.value })} placeholder="Descuento %" style={inputStyle} />
+          <h2 style={{ marginTop: 0 }}>Promos y descuentos</h2>
+          <form onSubmit={guardarPromoAdmin}>
+            <div style={formGridStyle}>
+              <input value={promoForm.titulo} onChange={(event) => setPromoForm({ ...promoForm, titulo: event.target.value })} placeholder="Titulo de la promo" style={inputStyle} />
+              <input value={promoForm.descuento} onChange={(event) => setPromoForm({ ...promoForm, descuento: event.target.value })} placeholder="Descuento %" inputMode="numeric" style={inputStyle} />
+              <textarea value={promoForm.texto} onChange={(event) => setPromoForm({ ...promoForm, texto: event.target.value })} placeholder="Texto de la promocion" style={{ ...inputStyle, minHeight: "70px" }} />
               <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "#444" }}>
-                <input type="checkbox" checked={promoForm.activa} onChange={(e) => setPromoForm({ ...promoForm, activa: e.target.checked })} />
+                <input type="checkbox" checked={promoForm.activa} onChange={(event) => setPromoForm({ ...promoForm, activa: event.target.checked })} />
                 Promo activa
               </label>
             </div>
-            <div style={{ display: "flex", gap: "10px", marginTop: "12px" }}>
-              <button type="submit" style={botonVerde}>Guardar promo</button>
+            <div style={actionsStyle}>
+              <button type="submit" disabled={guardando} style={botonVerde}>{guardando ? "Guardando..." : "Guardar promo"}</button>
               {promoEditando && <button type="button" onClick={() => { setPromoEditando(null); setPromoForm(promoVacio); }} style={botonGris}>Cancelar</button>}
             </div>
           </form>
 
-          <div style={{ display: "grid", gap: "8px", marginTop: "12px" }}>
-            {promos.map((promo) => (
-              <div key={promo.id} style={{ border: "1px solid #e5ece5", borderRadius: "10px", padding: "10px", background: "#fff" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", gap: "8px" }}>
+          <div style={{ display: "grid", gap: "10px", marginTop: "18px" }}>
+            {promos.length === 0 ? (
+              <p style={mutedStyle}>Todavia no hay promos cargadas.</p>
+            ) : promos.map((promo) => (
+              <article key={promo.id} style={itemStyle}>
+                <div>
                   <strong>{promo.titulo}</strong>
-                  <span style={{ color: promo.activa ? "#2f8f46" : "#999", fontSize: "0.9rem" }}>{promo.activa ? "Activa" : "Inactiva"}</span>
+                  <div style={mutedStyle}>{promo.texto || "Sin texto"}</div>
+                  <div style={{ color: "#2f8f46", fontWeight: 700 }}>{promo.descuento}% de descuento - {promo.activa ? "Activa" : "Inactiva"}</div>
                 </div>
-                <div style={{ color: "#666", fontSize: "0.95rem", marginTop: "4px" }}>{promo.texto || "Sin texto"}</div>
-                <div style={{ color: "#2f8f46", fontWeight: "700", marginTop: "4px" }}>{promo.descuento}% de descuento</div>
-                <div style={{ display: "flex", gap: "8px", marginTop: "8px" }}>
+                <div style={actionsStyle}>
                   <button onClick={() => editarPromo(promo)} style={botonGris}>Editar</button>
-                  <button onClick={() => borrarPromo(promo.id)} style={botonRojo}>Borrar</button>
+                  <button onClick={() => borrarPromoAdmin(promo.id)} style={botonRojo}>Borrar</button>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </section>
@@ -344,10 +512,13 @@ export default function AdminPage() {
 
       {vistaActiva === "productos" && (
         <section style={panelStyle}>
-          <h2 style={{ marginTop: 0 }}>Listado de prendas</h2>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: "12px", flexWrap: "wrap", alignItems: "center" }}>
+            <h2 style={{ margin: 0 }}>Productos ({productosFiltradosAdmin.length})</h2>
+            {cargando && <span style={mutedStyle}>Cargando...</span>}
+          </div>
 
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "12px" }}>
-            {(["Todos", ...categorias]).map((categoria) => (
+          <div style={filtersStyle}>
+            {["Todos", ...CATEGORIAS].map((categoria) => (
               <button
                 key={categoria}
                 onClick={() => {
@@ -361,7 +532,7 @@ export default function AdminPage() {
             ))}
           </div>
 
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "16px" }}>
+          <div style={filtersStyle}>
             {tallesDisponibles.map((talle) => (
               <button
                 key={talle}
@@ -374,29 +545,29 @@ export default function AdminPage() {
           </div>
 
           <div style={{ display: "grid", gap: "10px" }}>
-            {productosFiltradosAdmin.map((producto) => (
-              <div
-                key={producto.id}
-                onClick={() => editarProducto(producto)}
-                style={{ border: "1px solid #e2e8e2", padding: "12px", borderRadius: "10px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px", flexWrap: "wrap", cursor: "pointer" }}
-              >
-                <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                  {producto.imagen ? (
-                    <img src={producto.imagen} alt={producto.nombre} style={{ width: "60px", height: "60px", objectFit: "cover", borderRadius: "8px" }} />
-                  ) : (
-                    <div style={{ width: "60px", height: "60px", borderRadius: "8px", background: "#f0f0f0", display: "flex", alignItems: "center", justifyContent: "center", color: "#888" }}>Sin img</div>
-                  )}
-                  <div>
-                    <strong>{producto.nombre}</strong>
-                    <div style={{ color: "#666", fontSize: "0.95rem" }}>{producto.categoria} • {producto.precio} • Talles: {producto.talles || "—"}</div>
+            {productosFiltradosAdmin.map((producto) => {
+              const imagenes = obtenerImagenes(producto);
+              return (
+                <article key={producto.id} style={itemStyle}>
+                  <div style={{ display: "flex", gap: "10px", alignItems: "center", minWidth: 0 }}>
+                    {imagenes[0] ? (
+                      <img src={imagenes[0]} alt={producto.nombre} style={thumbStyle} />
+                    ) : (
+                      <div style={emptyThumbStyle}>Sin img</div>
+                    )}
+                    <div style={{ minWidth: 0 }}>
+                      <strong>{producto.nombre}</strong>
+                      <div style={mutedStyle}>{producto.categoria} | {producto.precio} | Talles: {producto.talles || "-"}</div>
+                      {producto.descripcion && <div style={mutedStyle}>{producto.descripcion}</div>}
+                    </div>
                   </div>
-                </div>
-                <div style={{ display: "flex", gap: "8px" }}>
-                  <button onClick={(event) => { event.stopPropagation(); editarProducto(producto); }} style={botonGris}>Editar</button>
-                  <button onClick={(event) => { event.stopPropagation(); borrarProducto(producto.id); }} style={botonRojo}>Borrar</button>
-                </div>
-              </div>
-            ))}
+                  <div style={actionsStyle}>
+                    <button onClick={() => editarProducto(producto)} style={botonGris}>Editar</button>
+                    <button onClick={() => borrarProductoAdmin(producto.id)} style={botonRojo}>Borrar</button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       )}
@@ -404,11 +575,32 @@ export default function AdminPage() {
   );
 }
 
-const inputStyle = {
-  width: "100%",
-  padding: "10px 12px",
-  borderRadius: "8px",
-  border: "1px solid #c3d8c3",
+const adminPageStyle = {
+  maxWidth: "1180px",
+  margin: "0 auto",
+  padding: "18px",
+  fontFamily: "Arial, sans-serif",
+  color: "#121212",
+};
+
+const headerStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: "12px",
+  flexWrap: "wrap",
+  marginBottom: "14px",
+};
+
+const titleStyle = {
+  color: "#2f8f46",
+  margin: 0,
+};
+
+const mutedStyle = {
+  color: "#666",
+  fontSize: "0.95rem",
+  margin: 0,
 };
 
 const panelStyle = {
@@ -416,13 +608,100 @@ const panelStyle = {
   border: "1px solid #d8f0d8",
   padding: "16px",
   borderRadius: "12px",
+  marginBottom: "16px",
+};
+
+const inputStyle = {
+  width: "100%",
+  padding: "12px",
+  borderRadius: "8px",
+  border: "1px solid #c3d8c3",
+  fontSize: "16px",
+};
+
+const formGridStyle = {
+  display: "grid",
+  gap: "12px",
+};
+
+const tabsStyle = {
+  display: "flex",
+  gap: "10px",
+  marginBottom: "16px",
+  flexWrap: "wrap",
+};
+
+const filtersStyle = {
+  display: "flex",
+  gap: "8px",
+  flexWrap: "wrap",
+  margin: "14px 0",
+};
+
+const actionsStyle = {
+  display: "flex",
+  gap: "8px",
+  flexWrap: "wrap",
+  marginTop: "10px",
+};
+
+const imageFieldStyle = {
+  display: "grid",
+  gridTemplateColumns: "minmax(0, 1fr) auto",
+  gap: "12px",
+  alignItems: "end",
+};
+
+const labelStyle = {
+  display: "block",
+  marginBottom: "6px",
+  color: "#444",
+  fontWeight: 700,
+};
+
+const previewStyle = {
+  width: "92px",
+  height: "92px",
+  objectFit: "cover",
+  borderRadius: "8px",
+  border: "1px solid #d8f0d8",
+};
+
+const itemStyle = {
+  border: "1px solid #e2e8e2",
+  padding: "12px",
+  borderRadius: "10px",
+  background: "#fff",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: "12px",
+  flexWrap: "wrap",
+};
+
+const thumbStyle = {
+  width: "64px",
+  height: "64px",
+  objectFit: "cover",
+  borderRadius: "8px",
+  flex: "0 0 auto",
+};
+
+const emptyThumbStyle = {
+  ...thumbStyle,
+  background: "#f0f0f0",
+  color: "#777",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "12px",
 };
 
 const botonVerde = {
   background: "#2f8f46",
   color: "white",
   border: "none",
-  padding: "10px 14px",
+  padding: "11px 14px",
   borderRadius: "8px",
   cursor: "pointer",
 };
@@ -431,7 +710,7 @@ const botonGris = {
   background: "#e7e7e7",
   color: "#111",
   border: "none",
-  padding: "10px 14px",
+  padding: "11px 14px",
   borderRadius: "8px",
   cursor: "pointer",
 };
@@ -440,7 +719,30 @@ const botonRojo = {
   background: "#d9534f",
   color: "white",
   border: "none",
-  padding: "10px 14px",
+  padding: "11px 14px",
   borderRadius: "8px",
   cursor: "pointer",
+};
+
+const noticeStyle = {
+  background: "#fff7d6",
+  color: "#664d03",
+  border: "1px solid #f3d36b",
+  borderRadius: "10px",
+  padding: "10px 12px",
+  marginBottom: "12px",
+};
+
+const errorStyle = {
+  color: "#d9534f",
+  margin: 0,
+};
+
+const errorBoxStyle = {
+  background: "#fff0f0",
+  color: "#a52727",
+  border: "1px solid #f2b7b7",
+  borderRadius: "10px",
+  padding: "10px 12px",
+  marginBottom: "12px",
 };
