@@ -426,8 +426,8 @@ button {
 }
 
 .productGrid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    margin-top: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
 }
 
 .productImageWrap {
@@ -586,4 +586,30 @@ button {
     .productActions {
         flex-direction: column;
     }
+    .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.productImageWrap img {
+    height: 180px;
+}
+
+.productBody {
+    padding: 10px;
+}
+
+.productBody h3 {
+    font-size: 16px;
+}
+
+.productPrice {
+    font-size: 18px;
+}
+
+.productActions button,
+.productActions a {
+    font-size: 13px;
+    padding: 10px;
+}
 }
