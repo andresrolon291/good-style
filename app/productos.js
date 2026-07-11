@@ -571,13 +571,6 @@ export const productos = [
     },
     {
         categoria: "Remeras",
-        nombre: "remera boxy fresh",
-        precio: "$24.000",
-        imagen: "/productos/remera-boxy-fresh.jpeg",
-        talles: "S",
-    },
-    {
-        categoria: "Remeras",
         nombre: "Chomba Boxy Good",
         precio: "$25.000",
         imagen: "/productos/chomba-boxy-good.jpeg",
@@ -687,14 +680,6 @@ export const productos = [
     },
     {
         categoria: "Remeras",
-        nombre: "Over Seoul",
-        precio: "$19.000",
-        imagen: "/productos/over-seoul-1.jpeg",
-        imagen2: "/productos/over-seoul-2.jpeg",
-        talles: "L",
-    },
-    {
-        categoria: "Remeras",
         nombre: "Over Chateau",
         precio: "$19.000",
         imagen: "/productos/over-chateau-1.jpeg",
@@ -786,22 +771,6 @@ export const productos = [
         talles: "M",
     },
     {
-        categoria: "Remeras",
-        nombre: "Remera Regular Original",
-        precio: "$19.000",
-        imagen: "/productos/remera-regular-original-1.jpeg",
-        imagen2: "/productos/remera-regular-original-2.jpeg",
-        talles: "XXL",
-    },
-    {
-        categoria: "Remeras",
-        nombre: "Remera Regular Vectory",
-        precio: "$19.000",
-        imagen: "/productos/remera-regular-vectory-1.jpeg",
-        imagen2: "/productos/remera-regular-vectory-2.jpeg",
-        talles: "S",
-    },
-    {
         categoria: "Accesorios",
         nombre: "Gorra New York Azul",
         precio: "$12.500",
@@ -812,12 +781,6 @@ export const productos = [
         nombre: "Gorra New York",
         precio: "$12.500",
         imagen: "/productos/gorra-new-york.jpeg",
-    },
-    {
-        categoria: "Accesorios",
-        nombre: "Gorra New York 1985",
-        precio: "$12.500",
-        imagen: "/productos/gorra-new-york-1985.jpeg",
     },
     {
         categoria: "Accesorios",
@@ -1118,13 +1081,6 @@ export const productos = [
         precio: "$70.000",
         imagen: "/productos sneakers/puma-la-france.jpeg",
         talles: "40",
-    },
-     {
-        categoria: "Zapatillas",
-        nombre: "Puma Suede XL",
-        precio: "$65.000",
-        imagen: "/productos sneakers/puma-suede-xl.jpeg",
-        talles: "41",
     },
     {
         categoria: "Zapatillas",
