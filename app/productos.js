@@ -15,17 +15,10 @@ export const productos = [
     },
     {
         categoria: "Jeans",
-        nombre: "Baggy Localizado Oscuro",
-        precio: "$39.000",
-        imagen: "/productos/Baggy-localizado-osc.jpeg",
-        talles: "40,42",
-    },
-    {
-        categoria: "Jeans",
         nombre: "Semy Baggy Azul",
         precio: "$39.000",
         imagen: "/productos/Semi-Baggy-azul.jpeg",
-        talles: "40",
+        talles: "38,40",
     },
     {
         categoria: "Jeans",
@@ -48,19 +41,19 @@ export const productos = [
         imagen: "/productos/Semi-baggy-óxido.jpeg",
         talles: "38,40",
     },
-    {
-        categoria: "Jeans",
-        nombre: "Semy Baggy Rasgado",
-        precio: "$39.000",
-        imagen: "/productos/Semi-baggy-rasgado.jpeg",
-        talles: "38",
-    },
      {
         categoria: "Jeans",
         nombre: "Semy Baggy Total Black",
         precio: "$39.000",
         imagen: "/productos/Semi-Baggy-total-black.jpeg",
-        talles: "38,40,42",
+        talles: "38,40",
+    },
+    {
+        categoria: "Jeans",
+        nombre: "Semy Baggy Gris perla",
+        precio: "$39.000",
+        imagen: "/productos/Semi-Baggy-gris-perla.jpeg",
+        talles: "38,42",
     },
     {
         categoria: "Jeans",
@@ -89,13 +82,6 @@ export const productos = [
         precio: "$30.000",
         imagen: "/productos/joggin-recto-negro.jpeg",
         talles: "3,4",
-    },
-    {
-        categoria: "Jeans",
-        nombre: "Baggy Celim",
-        precio: "$39.000",
-        imagen: "/productos/baggy-celim.jpeg",
-        talles: "44",
     },
     {
         categoria: "Jeans",
@@ -158,7 +144,7 @@ export const productos = [
         nombre: "Jeans Semi Baggy Gris Oscuro",
         precio: "$39.000",
         imagen: "/productos/semi-baggy-gris-oscuro.jpeg",
-        talles: "40,44,46",
+        talles: "40,44",
     },
     {
         categoria: "Jeans",
@@ -243,7 +229,7 @@ export const productos = [
         nombre: "Baggy Costuras Blancas",
         precio: "$39.000",
         imagen: "/productos/baggy-costuras-blancas.jpeg",
-        talles: "42, 46",
+        talles: "42",
     },
     {
         categoria: "Jeans",
@@ -336,13 +322,6 @@ export const productos = [
     },
     {
         categoria: "Buzos",
-        nombre: "Buzo Over San Francisco",
-        precio: "$40.000",
-        imagen: "/productos/buzo-over-san-francisco.jpeg",
-        talles: "M",
-    },
-    {
-        categoria: "Buzos",
         nombre: "Buzo Corazon",
         precio: "$35.000",
         imagen: "/productos/buzo-corazon.jpeg",
@@ -354,14 +333,6 @@ export const productos = [
         precio: "$38.000",
         imagen: "/productos/buzo-over-blossom.jpeg",
         talles: "S",
-    },
-    {
-        categoria: "Buzos",
-        nombre: "Buzo Over Boxing Club",
-        precio: "$40.000",
-        imagen: "/productos/buzo-over-boxing-club-1.jpeg",
-        imagen2: "/productos/buzo-over-boxing-club-2.jpeg",
-        talles: "M",
     },
     {
         categoria: "Buzos",
@@ -399,14 +370,6 @@ export const productos = [
         precio: "$35.000",
         imagen: "/productos/buzo-over-rosa-1.jpeg",
         imagen2: "/productos/buzo-over-rosa-2.jpeg",
-        talles: "S",
-    },
-    {
-        categoria: "Buzos",
-        nombre: "Buzo Over Stree",
-        precio: "$40.000",
-        imagen: "/productos/buzo-over-stree-1.jpeg",
-        imagen2: "/productos/buzo-over-stree-2.jpeg",
         talles: "S",
     },
     {
