@@ -34,13 +34,6 @@ export const productos = [
         imagen: "/productos/semi-baggy-beige.jpeg",
         talles: "38",
     },
-     {
-        categoria: "Jeans",
-        nombre: "Semy Baggy Camuflado",
-        precio: "$39.000",
-        imagen: "/productos/Semi-Baggy-camuflado.jpeg",
-        talles: "38",
-    },
     {
         categoria: "Jeans",
         nombre: "Semy Baggy Gris Carbon",
@@ -350,13 +343,6 @@ export const productos = [
     },
     {
         categoria: "Buzos",
-        nombre: "Buzo Chomba Originals Black",
-        precio: "$40.000",
-        imagen: "/productos/buzo-chomba-original-black.jpeg",
-        talles: "S",
-    },
-    {
-        categoria: "Buzos",
         nombre: "Buzo Corazon",
         precio: "$35.000",
         imagen: "/productos/buzo-corazon.jpeg",
@@ -436,13 +422,6 @@ export const productos = [
         precio: "$22.500",
         imagen: "/productos/sweter-plush-marron.jpeg",
         talles: "L",
-    },
-    {
-        categoria: "Buzos",
-        nombre: "Sweter Waffle Plush",
-        precio: "$36.000",
-        imagen: "/productos/sweter-waffle-plush.jpeg",
-        talles: "M",
     },
     {
         categoria: "Buzos",
@@ -669,14 +648,6 @@ export const productos = [
         precio: "$20.500",
         imagen: "/productos/boxy-nevada.jpeg",
         talles: "L",
-    },
-    {
-        categoria: "Remeras",
-        nombre: "Clasica Billabong",
-        precio: "$22.000",
-        imagen: "/productos/clasica-billabong-1.jpeg",
-        imagen2: "/productos/clasica-billabong-2.jpeg",
-        talles: "XXL",
     },
     {
         categoria: "Remeras",
@@ -1020,13 +991,6 @@ export const productos = [
     },
     {
         categoria: "Accesorios",
-        nombre: "Gorro Miami",
-        precio: "$14.500",
-        imagen: "/productos/gorro-miami.jpeg",
-        descripcion: "Gorros de hilo con logo Bordoo.",
-    },
-    {
-        categoria: "Accesorios",
         nombre: "Gorro New Orleans",
         precio: "$14.500",
         imagen: "/productos/gorro-new-orleans.jpeg",
@@ -1174,13 +1138,6 @@ export const productos = [
         nombre: "Vans Hylane ecocuero",
         precio: "$30.000",
         imagen: "/productos sneakers/vans-hylane-cuerina.jpeg",
-        talles: "39",
-    },
-    {
-        categoria: "Zapatillas",
-        nombre: "Vans Knu Total Black",
-        precio: "$65.000",
-        imagen: "/productos sneakers/vans-knu-total-black.jpeg",
         talles: "39",
     },
     {
