@@ -52,7 +52,7 @@ export const productos = [
         categoria: "Jeans",
         nombre: "Semy Baggy Gris perla",
         precio: "$39.000",
-        imagen: "/productos/Semi-Baggy-gris-perla.jpeg",
+        imagen: "/productos/semi-baggy-gris-perla.jpeg",
         talles: "38,42",
     },
     {
@@ -60,7 +60,7 @@ export const productos = [
         nombre: "Jogging Baggy Gris Perla",
         precio: "$35.000",
         imagen: "/productos/jogging-baggy-gris-perla.jpeg",
-        talles: "L",
+        talles: "42",
     },
     {
         categoria: "Jeans",
@@ -186,7 +186,7 @@ export const productos = [
         nombre: "Jogger Mom Frizado",
         precio: "$30.000",
         imagen: "/productos/jogger-mom-frizado.jpeg",
-        talles: "L",
+        talles: "42",
     },
     {
         categoria: "Jeans",
