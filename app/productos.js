@@ -11,7 +11,7 @@ export const productos = [
         nombre: "Jogging Baggy Bordo",
         precio: "$35.000",
         imagen: "/productos/jogging-baggy-bordo.jpeg",
-        talles: "S",
+        talles: "38",
     },
     {
         categoria: "Jeans",
@@ -74,14 +74,14 @@ export const productos = [
         nombre: "Jogging Mom Chicago",
         precio: "$26.000",
         imagen: "/productos/jogging-mom-chicago.jpeg",
-        talles: "M",
+        talles: "40",
     },
     {
         categoria: "Jeans",
         nombre: "Jogging Recto",
         precio: "$30.000",
         imagen: "/productos/joggin-recto-negro.jpeg",
-        talles: "3,4",
+        talles: "42,44",
     },
     {
         categoria: "Jeans",
@@ -165,7 +165,7 @@ export const productos = [
         nombre: "Joggin Baggy",
         precio: "$35.000",
         imagen: "/productos/joggin-baggy.jpeg",
-        talles: "M, L",
+        talles: "40,42",
     },
     {
         categoria: "Jeans",
