@@ -1,10 +1,48 @@
 export const productos = [
     {
         categoria: "Jeans",
+        nombre: "Baggy Camuflado Claro",
+        precio: "$42.000",
+        imagen: "/productos/baggy-camuflado-claro-38.jpeg",
+        talles: "38",
+    },
+    {
+        categoria: "Jeans",
+        nombre: "Baggy Camuflado Oscuro",
+        precio: "$42.000",
+        imagen: "/productos/baggy-camuflado-oscuro-40.jpeg",
+        talles: "40",
+    },
+    {
+    
+        categoria: "Jeans",
+        nombre: "Baggy Localizado alto",
+        precio: "$42.000",
+        imagen: "/productos/baggy-localizado-alto.jpeg",
+        talles: "38,46",
+    },
+    {
+    
+        categoria: "Jeans",
+        nombre: "Semi Baggy Garbardina",
+        precio: "$42.000",
+        imagen: "/productos/semi-baggy-gabardina.jpeg",
+        talles: "38,44",
+    },
+    {
+    
+        categoria: "Jeans",
         nombre: "Baggy Azul Clasico",
         precio: "$42.000",
         imagen: "/productos/baggy-azul-clasico.jpeg",
         talles: "38, 42",
+    },
+    {
+        categoria: "Jeans",
+        nombre: "Semi Baggy Rasgado",
+        precio: "$42.000",
+        imagen: "/productos/Semi-baggy-rasgado.jpeg",
+        talles: "44,46",
     },
     {
         categoria: "Jeans",
@@ -18,7 +56,7 @@ export const productos = [
         nombre: "Semy Baggy Beige",
         precio: "$42.000",
         imagen: "/productos/semi-baggy-beige.jpeg",
-        talles: "38",
+        talles: "38,44",
     },
     {
         categoria: "Jeans",
@@ -509,7 +547,7 @@ export const productos = [
         precio: "$26.000",
         imagen: "/productos/suplente-1.jpeg",
         imagen2: "/productos/suplente-2.jpeg",
-        talles: "S,M,L,XL,XXL",
+        talles: "L,XL,XXL",
     },
     {
         categoria: "Remeras",
