@@ -56,7 +56,7 @@ export const productos = [
         nombre: "Semy Baggy Beige",
         precio: "$42.000",
         imagen: "/productos/semi-baggy-beige.jpeg",
-        talles: "38,44",
+        talles: "44",
     },
     {
         categoria: "Jeans",
@@ -547,7 +547,7 @@ export const productos = [
         precio: "$26.000",
         imagen: "/productos/suplente-1.jpeg",
         imagen2: "/productos/suplente-2.jpeg",
-        talles: "L,XL,XXL",
+        talles: "XL,XXL",
     },
     {
         categoria: "Remeras",
@@ -555,7 +555,7 @@ export const productos = [
         precio: "$22.000",
         imagen: "/productos/pre-mach-1.jpeg",
         imagen2: "/productos/pre-mach-2.jpeg",
-        talles: "S,M,L",
+        talles: "M,L",
     },
     {
         categoria: "Remeras",
@@ -563,7 +563,7 @@ export const productos = [
         precio: "$25.000",
         imagen: "/productos/pre-mach-blanca-1.jpeg",
         imagen2: "/productos/pre-mach-blanca-2.jpeg",
-        talles: "S,M,L",
+        talles: "M",
     },
     {
         categoria: "Remeras",
@@ -572,7 +572,7 @@ export const productos = [
         imagen: "/productos/pre-mach-azul-1.jpeg",
         imagen2: "/productos/pre-mach-azul-2.jpeg",
         imagen3: "/productos/pre-mach-azul-3.jpeg",
-        talles: "M,L,XL",
+        talles: "L,XL",
     },
     {
         categoria: "Remeras",
@@ -758,13 +758,6 @@ export const productos = [
         precio: "$19.000",
         imagen: "/productos/remera-regular-is-just.jpeg",
         talles: "XL",
-    },
-    {
-        categoria: "Remeras",
-        nombre: "Vans Rayada Corte Clasico",
-        precio: "$22.000",
-        imagen: "/productos/vans-rayada-corte-clasico.jpeg",
-        talles: "S",
     },
     {
         categoria: "Remeras",
@@ -1029,13 +1022,6 @@ export const productos = [
     },
      {
         categoria: "Zapatillas",
-        nombre: "Jordan 4 Pink",
-        precio: "$65.000",
-        imagen: "/productos sneakers/jordan-4-pink.jpeg",
-        talles: "36,37",
-    },
-     {
-        categoria: "Zapatillas",
         nombre: "Jordan 4 Bred",
         precio: "$65.000",
         imagen: "/productos sneakers/jordan-retro-4-bred.jpeg",
@@ -1065,13 +1051,6 @@ export const productos = [
         imagen: "/productos sneakers/nike-sb-panda.jpeg",
         imagen2: "/productos sneakers/nike-sb-panda-1.jpeg",
         talles: "42",
-    },
-     {
-        categoria: "Zapatillas",
-        nombre: "Nike Travis Scott",
-        precio: "$65.000",
-        imagen: "/productos sneakers/nike-travis-scott.jpeg",
-        talles: "40",
     },
     {
         categoria: "Zapatillas",
