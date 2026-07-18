@@ -543,14 +543,6 @@ export const productos = [
     },
     {
         categoria: "Remeras",
-        nombre: "SUPLENTE",
-        precio: "$26.000",
-        imagen: "/productos/suplente-1.jpeg",
-        imagen2: "/productos/suplente-2.jpeg",
-        talles: "XL,XXL",
-    },
-    {
-        categoria: "Remeras",
         nombre: "PRE MATCH RAYADA",
         precio: "$22.000",
         imagen: "/productos/pre-mach-1.jpeg",
