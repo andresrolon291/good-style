@@ -63,7 +63,7 @@ export const productos = [
         nombre: "Semy Baggy Gris Carbon",
         precio: "$42.000",
         imagen: "/productos/Semi-baggy-gris-Carbon.jpeg",
-        talles: "38,40",
+        talles: "38",
     },
      {
         categoria: "Jeans",
