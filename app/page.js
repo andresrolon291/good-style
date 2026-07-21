@@ -11,6 +11,7 @@ const CATEGORIAS = [
   "Remeras",
   "Accesorios",
   "Zapatillas",
+  "Nuestra Historia",
 ];
 
 const ORDEN_TALLES = [
@@ -188,6 +189,11 @@ export default function Home() {
       label: "Zapatillas",
       imagen: productos.find((item) => item.categoria === "Zapatillas" && item.imagen)?.imagen || "/productos/reloj-digital-1.jpeg",
     },
+    {
+      nombre: "Nuestra Historia",
+      label: "Nuestra Historia",
+      imagen: productos.find((item) => item.categoria === "Nuestra Historia" && item.imagen)?.imagen || "/productos/reloj-digital-1.jpeg",
+    },
   ];
 
   return (
@@ -212,7 +218,7 @@ export default function Home() {
     marginBottom: "15px",
   }}
 >
-  Nuestra Historia
+  
 </h1>
 
 <p
@@ -221,26 +227,9 @@ export default function Home() {
     lineHeight: "1.7",
     marginBottom: "25px",
   }}
->
-  Más que una tienda de ropa, Good Style nació con la idea de ofrecer
-  prendas urbanas con personalidad, calidad y estilo para quienes quieren
-  destacar.
+> 
 </p>
 
-<button
-  style={{
-    background: "#2f8f46",
-    color: "white",
-    border: "none",
-    padding: "14px 28px",
-    borderRadius: "10px",
-    fontSize: "16px",
-    cursor: "pointer",
-    fontWeight: "bold",
-  }}
->
-  Ver nuestra historia
-</button>
           </div>
         </div>
       </header>
@@ -453,74 +442,6 @@ export default function Home() {
         : `Carrito (${carrito.length})`}
 </button>
 {carritoAbierto && (
-  <div className="cartPanel">
-    <h2>Mi carrito</h2>
-
-    {carrito.length === 0 ? (
-      <p>No hay productos.</p>
-    ) : (
-      <>
-        {carrito.map((producto, index) => (
-          <div
-            key={index}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginBottom: 12,
-              borderBottom: "1px solid #ddd",
-              paddingBottom: 10,
-            }}
-          >
-            <div>
-              <strong>{producto.nombre}</strong>
-              <br />
-              {producto.precio}
-            </div>
-
-            <button
-    onClick={() => {
-        console.log("CLICK");
-        setCarritoAbierto((prev) => !prev);
-    }}
-    style={{
-        position: "fixed",
-        top: "20px",
-        right: "20px",
-        zIndex: 9999,
-        display: "flex",
-        alignItems: "center",
-        gap: "10px",
-        padding: "12px 18px",
-        background: "#111",
-        color: "white",
-        border: "none",
-        borderRadius: "999px",
-        cursor: "pointer",
-        boxShadow: "0 8px 25px rgba(0,0,0,.25)",
-        fontWeight: "600",
-    }}
->
-    🛒 {carrito.length === 0 ? "Carrito vacío" : `Carrito (${carrito.length})`}
-</button>
-          </div>
-        ))}
-
-        <h3>
-          Total: ${total.toLocaleString("es-AR")}
-        </h3>
-
-        <a
-          href={linkWhatsapp}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Finalizar compra
-        </a>
-      </>
-    )}
-  </div>
-)}
-{carritoAbierto && (
   <div
     style={{
       position: "fixed",
@@ -560,22 +481,7 @@ export default function Home() {
               {producto.precio}
             </div>
 
-            <button
-              onClick={() =>
-                setCarrito(carrito.filter((_, i) => i !== index))
-              }
-              style={{
-                border: "none",
-                background: "red",
-                color: "white",
-                borderRadius: "50%",
-                width: "30px",
-                height: "30px",
-                cursor: "pointer",
-              }}
-            >
-              ×
-            </button>
+            
           </div>
         ))}
 
