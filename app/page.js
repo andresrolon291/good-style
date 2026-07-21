@@ -4,9 +4,31 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { getCatalogo } from "./productosStore";
 
-const CATEGORIAS = ["Todos", "Jeans", "Buzos", "Remeras", "Accesorios", "Zapatillas"];
-const ORDEN_TALLES = ["S", "M", "L", "XL", "XXL", "36", "37", "38", "39", "40", "41", "42", "44", "46"];
+const CATEGORIAS = [
+  "Todos",
+  "Jeans",
+  "Buzos",
+  "Remeras",
+  "Accesorios",
+  "Zapatillas",
+];
 
+const ORDEN_TALLES = [
+  "S",
+  "M",
+  "L",
+  "XL",
+  "XXL",
+  "36",
+  "37",
+  "38",
+  "39",
+  "40",
+  "41",
+  "42",
+  "44",
+  "46",
+];
 function obtenerImagenes(producto) {
   return [producto.imagen, producto.imagen2, producto.imagen3, producto.imagen4].filter(Boolean);
 }
@@ -27,8 +49,10 @@ export default function Home() {
   const [talleSeleccionado, setTalleSeleccionado] = useState("Todos");
   const [carrito, setCarrito] = useState([]);
   const [carritoCargado, setCarritoCargado] = useState(false);
+  const [carritoAbierto, setCarritoAbierto] = useState(false);
   const [imagenActual, setImagenActual] = useState({});
   const [imagenGrande, setImagenGrande] = useState(null);
+  const [mostrarHistoria, setMostrarHistoria] = useState(false);
   const [productos, setProductos] = useState([]);
   const [promos, setPromos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -162,7 +186,7 @@ export default function Home() {
     {
       nombre: "Zapatillas",
       label: "Zapatillas",
-      imagen: productos.find((item) => item.categoria === "Zapatillas" && item.imagen)?.imagen || "/productos sneakers/nike-sb-panda-1.jpeg",
+      imagen: productos.find((item) => item.categoria === "Zapatillas" && item.imagen)?.imagen || "/productos/reloj-digital-1.jpeg",
     },
   ];
 
@@ -182,10 +206,41 @@ export default function Home() {
           </div>
 
           <div className="heroCopy">
-            <h1>Calidad y estilo al mejor precio.</h1>
-            <p className="heroSubtitle">
-              Streetwear urbano, jeans, prendas oversize y accesorios seleccionados para destacar con identidad propia.
-            </p>
+          <h1
+  style={{
+    fontSize: "3rem",
+    marginBottom: "15px",
+  }}
+>
+  Nuestra Historia
+</h1>
+
+<p
+  style={{
+    color: "#555",
+    lineHeight: "1.7",
+    marginBottom: "25px",
+  }}
+>
+  Más que una tienda de ropa, Good Style nació con la idea de ofrecer
+  prendas urbanas con personalidad, calidad y estilo para quienes quieren
+  destacar.
+</p>
+
+<button
+  style={{
+    background: "#2f8f46",
+    color: "white",
+    border: "none",
+    padding: "14px 28px",
+    borderRadius: "10px",
+    fontSize: "16px",
+    cursor: "pointer",
+    fontWeight: "bold",
+  }}
+>
+  Ver nuestra historia
+</button>
           </div>
         </div>
       </header>
@@ -200,38 +255,13 @@ export default function Home() {
         ))}
       </div>
 
-      <section className="cartCard">
-        <div className="cartHeader">
-          <h2>Tu pedido ({carrito.length})</h2>
-          <span>{carrito.length > 0 ? `${carrito.length} prendas` : "Vacio por ahora"}</span>
-        </div>
-
-        {carrito.length === 0 ? (
-          <p className="cartEmpty">Agrega productos para armar tu pedido.</p>
-        ) : (
-          <>
-            <div className="cartItems">
-              {carrito.map((item, index) => (
-                <div key={`${item.id}-${index}`} className="cartItem">
-                  <span>{item.nombre} - {item.precio}</span>
-                  <button onClick={() => setCarrito(carrito.filter((_, i) => i !== index))}>Eliminar</button>
-                </div>
-              ))}
-            </div>
-            <p className="cartTotal">Total: ${total.toLocaleString("es-AR")}</p>
-            <button onClick={() => setCarrito([])} className="cartClear">Vaciar pedido</button>
-            <a href={linkWhatsapp} target="_blank" rel="noreferrer" className="cartWhatsApp">Finalizar pedido por WhatsApp</a>
-          </>
-        )}
-      </section>
-
       <section id="categorias" className="categoriesSection">
         <div className="sectionHeader sectionHeaderWide">
           <div>
-            <p className="eyebrow">Categorias principales</p>
-            <h2>Explora nuestras categorias</h2>
+            <p className="eyebrow"></p>
+            <h2></h2>
           </div>
-          <p className="sectionText">Encontra la prenda ideal para cada dia con una mirada simple y directa.</p>
+          <p className="sectionText"></p>
         </div>
         <div className="categoryGrid">
           {categoriasDestacadas.map((categoria) => (
@@ -250,7 +280,7 @@ export default function Home() {
               }}
             >
               <span>{categoria.label}</span>
-              <strong>Explorar</strong>
+              <strong></strong>
             </button>
           ))}
         </div>
@@ -263,7 +293,7 @@ export default function Home() {
               <p className="eyebrow">Catalogo</p>
               <h2>Explora por categoria, talle y busqueda</h2>
             </div>
-            <p className="sectionText">Encontra tu look ideal con filtros rapidos y una navegacion mas directa.</p>
+            <p className="sectionText"></p>
           </div>
         </div>
 
@@ -390,7 +420,189 @@ export default function Home() {
           <img src={imagenGrande} alt="Imagen ampliada" />
         </div>
       )}
+<button
+    onClick={() => setCarritoAbierto((prev) => !prev)}
+    style={{
+        position: "fixed",
+        top: "20px",
+        right: "20px",
+        zIndex: 9999,
 
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+
+        padding: "12px 18px",
+
+        background: "#111",
+        color: "white",
+
+        border: "none",
+        borderRadius: "999px",
+
+        cursor: "pointer",
+
+        boxShadow: "0 8px 25px rgba(0,0,0,.25)",
+        fontWeight: "600",
+    }}
+>
+    🛒
+
+    {carrito.length === 0
+        ? "Carrito vacío"
+        : `Carrito (${carrito.length})`}
+</button>
+{carritoAbierto && (
+  <div className="cartPanel">
+    <h2>Mi carrito</h2>
+
+    {carrito.length === 0 ? (
+      <p>No hay productos.</p>
+    ) : (
+      <>
+        {carrito.map((producto, index) => (
+          <div
+            key={index}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: 12,
+              borderBottom: "1px solid #ddd",
+              paddingBottom: 10,
+            }}
+          >
+            <div>
+              <strong>{producto.nombre}</strong>
+              <br />
+              {producto.precio}
+            </div>
+
+            <button
+    onClick={() => {
+        console.log("CLICK");
+        setCarritoAbierto((prev) => !prev);
+    }}
+    style={{
+        position: "fixed",
+        top: "20px",
+        right: "20px",
+        zIndex: 9999,
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        padding: "12px 18px",
+        background: "#111",
+        color: "white",
+        border: "none",
+        borderRadius: "999px",
+        cursor: "pointer",
+        boxShadow: "0 8px 25px rgba(0,0,0,.25)",
+        fontWeight: "600",
+    }}
+>
+    🛒 {carrito.length === 0 ? "Carrito vacío" : `Carrito (${carrito.length})`}
+</button>
+          </div>
+        ))}
+
+        <h3>
+          Total: ${total.toLocaleString("es-AR")}
+        </h3>
+
+        <a
+          href={linkWhatsapp}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Finalizar compra
+        </a>
+      </>
+    )}
+  </div>
+)}
+{carritoAbierto && (
+  <div
+    style={{
+      position: "fixed",
+      top: "80px",
+      right: "20px",
+      width: "350px",
+      maxHeight: "80vh",
+      overflowY: "auto",
+      background: "white",
+      padding: "20px",
+      borderRadius: "15px",
+      boxShadow: "0 10px 30px rgba(0,0,0,.25)",
+      zIndex: 9999,
+    }}
+  >
+    <h2>Mi carrito</h2>
+
+    {carrito.length === 0 ? (
+      <p>Tu carrito está vacío.</p>
+    ) : (
+      <>
+        {carrito.map((producto, index) => (
+          <div
+            key={index}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "15px",
+              borderBottom: "1px solid #ddd",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>
+              <strong>{producto.nombre}</strong>
+              <br />
+              {producto.precio}
+            </div>
+
+            <button
+              onClick={() =>
+                setCarrito(carrito.filter((_, i) => i !== index))
+              }
+              style={{
+                border: "none",
+                background: "red",
+                color: "white",
+                borderRadius: "50%",
+                width: "30px",
+                height: "30px",
+                cursor: "pointer",
+              }}
+            >
+              ×
+            </button>
+          </div>
+        ))}
+
+        <h3>Total: ${total.toLocaleString("es-AR")}</h3>
+
+        <a
+          href={linkWhatsapp}
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            display: "block",
+            textAlign: "center",
+            background: "#25D366",
+            color: "white",
+            padding: "12px",
+            borderRadius: "10px",
+            textDecoration: "none",
+            fontWeight: "bold",
+            marginTop: "15px",
+          }}
+        >
+          Finalizar compra por WhatsApp
+        </a>
+      </>
+    )}
+  </div>
+)}
       <a href="https://wa.me/5493786411223" target="_blank" rel="noreferrer" className="waFab">Chat</a>
     </main>
   );
