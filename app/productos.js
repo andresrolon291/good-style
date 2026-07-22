@@ -457,7 +457,7 @@ export const productos = [
         nombre: "Buzo Cuello Redondo",
         precio: "$37.000",
         imagen: "/productos/buzo-cuello-redondo.jpeg",
-        talles: "S",
+        talles: "S,XL",
     },
     {
         categoria: "Buzos",
@@ -785,13 +785,6 @@ export const productos = [
     },
     {
         categoria: "Accesorios",
-        nombre: "9PM 100ML",
-        precio: "$50.000",
-        imagen: "/productos/9pm.jpeg",
-        descripcion: "comienza con una salida frutal, lijeramete especiada, vainilla cremosa acompañada de haba tonka, llamativo juvenil exelente duracion, recomedado para uso de noche.",
-    },
-    {
-        categoria: "Accesorios",
         nombre: "Hawas Malibu 100ML",
         precio: "$50.000",
         imagen: "/productos/Hawas-Malibú.jpeg",
@@ -811,26 +804,12 @@ export const productos = [
         imagen: "/productos/Odyssey-aqua.jpeg",
         descripcion: "Es un peRfume extremadamete fesco, limpio y elegante. abre con citricos vibrantes y notas marinas que transmiten sesacion de recien salido de la ducha, a medida que se seca aparecen maderas suaves y almizcles que le dan mayor duracion. uso diario.",
     },
-    {
-        categoria: "Accesorios",
-        nombre: "Kit Ocean",
-        precio: "$16.000",
-        imagen: "/productos/kit-ocean-30ml-y-30gr.jpeg",
-        descripcion: "Aroma fresco y marino. Incluye perfume 30ml y gel de ducha 30gr, ideal para uso diario.",
-    },
      {
         categoria: "Accesorios",
         nombre: "Asad Lattafa",
         precio: "$50.000",
         imagen: "/productos/asad-chocolate.jpeg",
         descripcion: "100ml",
-    },
-     {
-        categoria: "Accesorios",
-        nombre: "Perfume Toscano 80ML",
-        precio: "$38.500",
-        imagen: "/productos/perf-toscano.jpeg",
-        descripcion: "Un aroma intenso donde el cuero es protagonista, esta acompañado por azafran, madera y un toque ahumado, que transmite lujo y mucha personalidad",
     },
     {
         categoria: "Accesorios",
