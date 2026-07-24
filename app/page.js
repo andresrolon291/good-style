@@ -366,9 +366,10 @@ Conocé cómo nació Good Style y el camino que recorrimos hasta llegar a donde 
   src="inicios-good.jpeg"
   alt=""
   style={{
-    width: "30%",
+    width: "80%",
     borderRadius: "20px",
     marginBottom: "25px",
+    srcAlign: "center",
   }}
 />
 
@@ -402,7 +403,7 @@ La ropa la teníamos que guardar en un bolso porque no contábamos con un lugar 
   src="primer-showrom.jpeg"
   alt=""
   style={{
-    width: "30%",
+    width: "80%",
     borderRadius: "20px",
     margin: "50px 0 25px",
   }}
@@ -433,9 +434,10 @@ Cuando apareció la oportunidad de abrir un local, decidimos volver a arriesgarn
   src="/historia3.jpeg"
   alt="Good Style Hoy"
   style={{
-    width: "50%",
+    width: "80%",
     borderRadius: "20px",
     margin: "50px 0 25px",
+    imgAlign: "center",
   }}
 />
 
