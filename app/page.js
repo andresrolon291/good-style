@@ -142,12 +142,52 @@ export default function Home() {
   }, [productosCategoriaActual]);
 
   const productosFiltrados = useMemo(() => {
+    const palabras = busqueda
+      .toLowerCase()
+      .trim()
+      .split(/\s+/)
+      .filter(
+        (p) =>
+          p &&
+          ![
+            "talle",
+            "talles",
+            "de",
+            "para",
+            "con",
+            "el",
+            "la",
+            "los",
+            "las",
+            "un",
+            "una",
+            "quiero",
+            "buscar"
+          ].includes(p)
+      );
+  
     return productosCategoriaActual.filter((producto) => {
+      const texto = `
+      ${producto.nombre || ""}
+      ${producto.categoria || ""}
+      ${producto.descripcion || ""}
+      ${obtenerTalles(producto).join(" ")}
+      ${producto.contenido || ""}
+    `.toLowerCase();
+  
+      const coincideBusqueda =
+        palabras.length === 0 ||
+        palabras.every((palabra) => texto.includes(palabra));
+  
       const tallesProducto = obtenerTalles(producto);
-      return talleSeleccionado === "Todos" || tallesProducto.includes(talleSeleccionado);
+      const coincideTalle =
+        talleSeleccionado === "Todos" ||
+        tallesProducto.includes(talleSeleccionado);
+  
+      return coincideBusqueda && coincideTalle;
     });
-  }, [productosCategoriaActual, talleSeleccionado]);
-
+  }, [productosCategoriaActual, busqueda, talleSeleccionado]);
+ 
   const linkWhatsapp = `https://wa.me/5493786411223?text=${encodeURIComponent(
     "Hola Good Style!\n\n" +
       "Quiero comprar:\n\n" +
@@ -281,35 +321,21 @@ export default function Home() {
           <div className="sectionHeader sectionHeaderWide">
             <div>
               <p className="eyebrow">Catalogo</p>
-              <h2>Explora por categoria, talle y busqueda</h2>
+              <h2></h2>
             </div>
             <p className="sectionText"></p>
           </div>
         </div>
 
-        <div className="toolbar">
-          {CATEGORIAS.map((categoria) => (
-            <button
-              key={categoria}
-              className={`chip ${categoriaSeleccionada === categoria ? "active" : ""}`}
-              onClick={() => {
-                setCategoriaSeleccionada(categoria);
-                setTalleSeleccionado("Todos");
-              }}
-            >
-              {categoria}
-            </button>
-          ))}
-        </div>
 
         <div className="searchWrap">
-          <input
-            type="search"
-            value={busqueda}
-            onChange={(event) => setBusqueda(event.target.value)}
-            placeholder="Buscar producto..."
-            aria-label="Buscar producto"
-          />
+        <input
+  type="text"
+  placeholder="Buscar por nombre, talle, categoría, perfume, 100ml..."
+  value={busqueda}
+  onChange={(e) => setBusqueda(e.target.value)}
+  className="searchInput"
+/>
         </div>
 
         {categoriaSeleccionada !== "Todos" && (
