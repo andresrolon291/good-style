@@ -11,7 +11,6 @@ const CATEGORIAS = [
   "Remeras",
   "Accesorios",
   "Zapatillas",
-  "",
 ];
 
 const ORDEN_TALLES = [
@@ -55,6 +54,7 @@ export default function Home() {
   const [imagenGrande, setImagenGrande] = useState(null);
   const [mostrarHistoria, setMostrarHistoria] = useState(false);
   const [historiaAbierta, setHistoriaAbierta] = useState(false);
+  const [descripcionAbierta, setDescripcionAbierta] = useState({});
   const [productos, setProductos] = useState([]);
   const [promos, setPromos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -193,7 +193,7 @@ export default function Home() {
     {
       nombre: "Nuestra Historia",
       label: "Nuestra Historia",
-      imagen: productos.find((item) => item.categoria === "Nuestra Historia" && item.imagen)?.imagen || "logo-good-style.jpeg",
+      imagen: productos.find((item) => item.categoria === "Nuestra Historia" && item.imagen)?.imagen || "local-chido.jpeg",
     },
   ];
 
@@ -342,7 +342,7 @@ export default function Home() {
 <h2
   style={{
     textAlign: "center",
-    fontSize: "42px",
+    fontSize: "30px",
     marginBottom: "20px",
   }}
 >
@@ -409,7 +409,7 @@ La ropa la teníamos que guardar en un bolso porque no contábamos con un lugar 
   }}
 />
 
-<h3 style={{ marginBottom: "15px" }}>
+<h3 style={{ marginBottom: "30px" }}>
 Primer showroom
 </h3>
 
@@ -441,7 +441,7 @@ Cuando apareció la oportunidad de abrir un local, decidimos volver a arriesgarn
   }}
 />
 
-<h3 style={{ marginBottom: "15px" }}>
+<h3 style={{ marginBottom: "30px" }}>
 Good Style hoy
 </h3>
 
@@ -541,7 +541,43 @@ Porque Good Style nunca fue solo un local de ropa. Siempre fue la historia de do
                     <p className="productCategory">{producto.categoria}</p>
                     <h3>{producto.nombre}</h3>
                     <p className="productPrice">{producto.precio}</p>
-                    {producto.descripcion && <p className="productDescription">{producto.descripcion}</p>}
+                    {producto.descripcion && (
+  <>
+    <p className="productDescription">
+      {descripcionAbierta[producto.id]
+        ? producto.descripcion
+        : producto.descripcion.slice(0, 100)}
+
+      {!descripcionAbierta[producto.id] &&
+        producto.descripcion.length > 100 &&
+        "..."}
+    </p>
+
+    {producto.descripcion.length > 100 && (
+      <button
+        onClick={() =>
+          setDescripcionAbierta({
+            ...descripcionAbierta,
+            [producto.id]: !descripcionAbierta[producto.id],
+          })
+        }
+        style={{
+          background: "none",
+          border: "none",
+          color: "#2f8f46",
+          cursor: "pointer",
+          fontWeight: "bold",
+          padding: 0,
+          marginBottom: "10px",
+        }}
+      >
+        {descripcionAbierta[producto.id]
+          ? "Ver menos"
+          : "Ver más"}
+      </button>
+    )}
+  </>
+)}
                     {producto.talles && <p className="productSizes">Talles: {producto.talles}</p>}
                     <div className="productActions">
                       <button onClick={() => setCarrito((prev) => [...prev, producto])}>Agregar al carrito</button>

@@ -491,13 +491,6 @@ export const productos = [
         imagen2: "/productos/buzo-over-seven-2.jpeg",
         talles: "XXL",
     },
-     {
-        categoria: "Buzos",
-        nombre: "Buzo Over White",
-        precio: "$38.000",
-        imagen: "/productos/buzo-over-white.jpeg",
-        talles: "S",
-    },
     {
         categoria: "Buzos",
         nombre: "Buzo Over crem",
@@ -802,7 +795,7 @@ export const productos = [
         nombre: "Odyssey Aqua 100ML",
         precio: "$40.000",
         imagen: "/productos/Odyssey-aqua.jpeg",
-        descripcion: "Es un peRfume extremadamete fesco, limpio y elegante. abre con citricos vibrantes y notas marinas que transmiten sesacion de recien salido de la ducha, a medida que se seca aparecen maderas suaves y almizcles que le dan mayor duracion. uso diario.",
+        descripcion: "Es un perfume extremadamete fesco, limpio y elegante. abre con citricos vibrantes y notas marinas que transmiten sesacion de recien salido de la ducha, a medida que se seca aparecen maderas suaves y almizcles que le dan mayor duracion. uso diario.",
     },
      {
         categoria: "Accesorios",
@@ -842,23 +835,9 @@ export const productos = [
     },
     {
         categoria: "Accesorios",
-        nombre: "Hawas Fire",
-        precio: "$50.000",
-        imagen: "/productos/perf-hawas-fire.jpeg",
-        descripcion: "100ml.",
-    },
-    {
-        categoria: "Accesorios",
         nombre: "Insuperable",
         precio: "$22.000",
         imagen: "/productos/perf-insuperable.jpeg",
-        descripcion: "100ml.",
-    },
-     {
-        categoria: "Accesorios",
-        nombre: "Inversion",
-        precio: "$22.000",
-        imagen: "/productos/perf-inversion.jpeg",
         descripcion: "100ml.",
     },
     {
@@ -947,13 +926,6 @@ export const productos = [
     },
      {
         categoria: "Zapatillas",
-        nombre: "Adidas Samba White",
-        precio: "$65.000",
-        imagen: "/productos sneakers/adidas-samba-white.jpeg",
-        talles: "41",
-    },
-     {
-        categoria: "Zapatillas",
         nombre: "Converse Clasica",
         precio: "$35.000",
         imagen: "/productos sneakers/converse-clasica.jpeg",
@@ -990,13 +962,6 @@ export const productos = [
         imagen: "/productos sneakers/nike-sb-panda.jpeg",
         imagen2: "/productos sneakers/nike-sb-panda-1.jpeg",
         talles: "42",
-    },
-    {
-        categoria: "Zapatillas",
-        nombre: "Straye Black",
-        precio: "$70.000",
-        imagen: "/productos sneakers/straye-black.jpeg",
-        talles: "41",
     },
     {
         categoria: "Zapatillas",

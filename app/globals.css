@@ -300,7 +300,8 @@ button {
 }
 
 .categoryCard {
-    min-height: 140px;
+    min-height: 320px;
+    width: 220px;
     padding: 18px;
     display: flex;
     flex-direction: column;
