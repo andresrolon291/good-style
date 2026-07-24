@@ -11,7 +11,7 @@ const CATEGORIAS = [
   "Remeras",
   "Accesorios",
   "Zapatillas",
-  "Nuestra Historia",
+  "",
 ];
 
 const ORDEN_TALLES = [
@@ -54,6 +54,7 @@ export default function Home() {
   const [imagenActual, setImagenActual] = useState({});
   const [imagenGrande, setImagenGrande] = useState(null);
   const [mostrarHistoria, setMostrarHistoria] = useState(false);
+  const [historiaAbierta, setHistoriaAbierta] = useState(false);
   const [productos, setProductos] = useState([]);
   const [promos, setPromos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -187,12 +188,12 @@ export default function Home() {
     {
       nombre: "Zapatillas",
       label: "Zapatillas",
-      imagen: productos.find((item) => item.categoria === "Zapatillas" && item.imagen)?.imagen || "/productos/reloj-digital-1.jpeg",
+      imagen: productos.find((item) => item.categoria === "Zapatillas" && item.imagen)?.imagen || "straye-black.jpeg",
     },
     {
       nombre: "Nuestra Historia",
       label: "Nuestra Historia",
-      imagen: productos.find((item) => item.categoria === "Nuestra Historia" && item.imagen)?.imagen || "/productos/reloj-digital-1.jpeg",
+      imagen: productos.find((item) => item.categoria === "Nuestra Historia" && item.imagen)?.imagen || "logo-good-style.jpeg",
     },
   ];
 
@@ -324,7 +325,166 @@ export default function Home() {
             ))}
           </div>
         )}
+{categoriaSeleccionada === "Nuestra Historia" ? (
 
+<div
+  style={{
+    maxWidth: "950px",
+    margin: "40px auto",
+    background: "#fff",
+    borderRadius: "20px",
+    padding: "40px",
+    boxShadow: "0 10px 30px rgba(0,0,0,.12)",
+    lineHeight: "1.8",
+  }}
+>
+
+<h2
+  style={{
+    textAlign: "center",
+    fontSize: "42px",
+    marginBottom: "20px",
+  }}
+>
+Nuestra Historia
+</h2>
+
+<p
+  style={{
+    textAlign: "center",
+    color: "#666",
+    marginBottom: "50px",
+    fontSize: "18px",
+  }}
+>
+Conocé cómo nació Good Style y el camino que recorrimos hasta llegar a donde estamos hoy.
+</p>
+
+{/* ---------- IMAGEN 1 ---------- */}
+
+<img
+  src="inicios-good.jpeg"
+  alt=""
+  style={{
+    width: "30%",
+    borderRadius: "20px",
+    marginBottom: "25px",
+  }}
+/>
+
+<h3 style={{ marginBottom: "15px" }}>
+Los comienzos
+</h3>
+
+<p>
+Good Style nació hace 4 años con un sueño, muchas ganas de salir adelante y pocos recursos.
+</p>
+
+<p>
+Somos Andrés y Camila, dos mejores amigos que trabajaban todos los días, pero sabíamos que queríamos  construir algo propio. Empezamos vendiendo algunos buzos desde nuestro departamento, haciendo entregas a domicilio y apostando por un proyecto del que nadie nos aseguraba el éxito.
+</p>
+
+<p>
+No teníamos un showroom, ni clientes fijos, ni siquiera tantos amigos a quienes venderles. Solo teníamos la convicción de intentarlo.
+</p>
+
+<p>
+Con nuestros primeros ahorros hicimos un pedido a Buenos Aires. La emoción nos jugó una mala pasada y transferimos el dinero al alias equivocado. Era todo el dinero que teníamos. En ese momento sentimos que el sueño terminaba incluso antes de empezar. Pero apareció una persona que creyó en nosotros cuando nosotros mismos pensábamos que todo estaba perdido. Gracias a esa ayuda pudimos hacer nuestro primer pedido, devolver cada peso prestado y seguir adelante.
+</p>
+
+<p>
+La ropa la teníamos que guardar en un bolso porque no contábamos con un lugar donde almacenarla, y aun así recibíamos a los clientes en el patio de nuestro departamento. Poco a poco comenzaron a llegar más personas, incluso desde barrios cada vez más lejanos, y entendimos que estábamos construyendo algo mucho más grande de lo que imaginábamos.
+</p>
+
+{/* ---------- IMAGEN 2 ---------- */}
+
+<img
+  src="primer-showrom.jpeg"
+  alt=""
+  style={{
+    width: "30%",
+    borderRadius: "20px",
+    margin: "50px 0 25px",
+  }}
+/>
+
+<h3 style={{ marginBottom: "15px" }}>
+Primer showroom
+</h3>
+
+<p>
+Con el tiempo llegó nuestro primer showroom, pero también aparecieron los desafíos. La competencia crecía, las ventas bajaban y todavía sentíamos que nos faltaba encontrar nuestra verdadera identidad.
+
+</p>
+
+<p>
+Hasta que nació Good Style.
+</p>
+
+<p>
+Encontramos el estilo que queríamos ofrecer: ropa urbana masculina, zapatillas y accesorios seleccionados con el mismo cuidado con el que elegimos cada paso de este camino.
+</p>
+
+<p>
+Cuando apareció la oportunidad de abrir un local, decidimos volver a arriesgarnos. Andrés dejó su trabajo para dedicarse por completo al negocio. Lo que parecía una prueba de un mes terminó convirtiéndose en nuestro presente. Meses después, Camila también renunció para apostar todo por este sueño.
+</p>
+
+<img
+  src="/historia3.jpeg"
+  alt="Good Style Hoy"
+  style={{
+    width: "50%",
+    borderRadius: "20px",
+    margin: "50px 0 25px",
+  }}
+/>
+
+<h3 style={{ marginBottom: "15px" }}>
+Good Style hoy
+</h3>
+
+<p>
+Hoy cada uno tiene un rol que disfruta. Andrés es quien ves en los videos, quien te recibe en el local y elige las zapatillas y los accesorios. Camila está detrás de cada fotografía, cada diseño, cada contenido y de la selección de las prendas. Somos socios, mejores amigos y compartimos la misma visión desde el primer día.
+</p>
+
+<p>
+Nuestro camino no siempre fue fácil. Cambiamos de local, enfrentamos momentos de incertidumbre y volvimos a empezar más de una vez. Pero nunca perdimos las ganas ni la fe. Creemos que Dios guía cada paso y que el esfuerzo, la constancia y el sacrificio siempre encuentran su recompensa.
+</p>
+
+<p>
+Todavía nos emociona pensar que muchos de nuestros clientes nos acompañan desde aquella época en la que atendíamos en el patio de un departamento y preparábamos pedidos hasta la madrugada.
+</p>
+
+<p>
+Hoy esa historia continúa en esta página web.
+</p>
+
+<p
+  style={{
+    marginTop: "30px",
+    fontSize: "18px",
+    fontWeight: "600",
+    textAlign: "center",
+    color: "#2f8f46",
+  }}
+>
+Gracias por formar parte de Good Style. Cada compra no solo apoya un negocio; también acompaña el sueño de dos personas que un día decidieron animarse a empezar.
+</p>
+
+<p
+  style={{
+    marginTop: "20px",
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#2f8f46",
+  }}
+>
+Porque Good Style nunca fue solo un local de ropa. Siempre fue la historia de dos personas que eligieron creer en un sueño y que, gracias a ustedes, hoy pueden seguir viviéndolo.” ❤️❤️❤️
+</p>
+
+</div>
+
+) : ( 
         <div className="productGrid">
           {cargando ? (
             <div className="emptyState">Cargando productos...</div>
@@ -391,6 +551,7 @@ export default function Home() {
             })
           )}
         </div>
+        )}
       </section>
 
       <footer className="footerSection">
@@ -409,6 +570,93 @@ export default function Home() {
           <img src={imagenGrande} alt="Imagen ampliada" />
         </div>
       )}
+    {historiaAbierta && (
+  <div
+    onClick={() => setHistoriaAbierta(false)}
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,.8)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 99999,
+      padding: "30px",
+    }}
+  >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        background: "white",
+        maxWidth: "900px",
+        width: "100%",
+        maxHeight: "90vh",
+        overflowY: "auto",
+        borderRadius: "20px",
+        padding: "30px",
+      }}
+    >
+      <h2 style={{ textAlign: "center" }}>Nuestra Historia</h2>
+
+      {/* Imagen 1 */}
+      <div>📷 ACÁ VA LA IMAGEN 1</div>
+
+      <h3>Los comienzos</h3>
+
+      <p>Good Style nació hace más de 4 años...</p>
+      <p>Somos Andrés y Camila...</p>
+      <p>No teníamos un showroom...</p>
+
+      {/* Imagen 2 */}
+      <div>📷 ACÁ VA LA IMAGEN 2</div>
+
+      <h3>Primer showroom</h3>
+
+      <p>Con nuestros primeros ahorros...</p>
+      <p>La ropa la teníamos que guardar...</p>
+      <p>Con el tiempo llegó nuestro primer showroom...</p>
+
+      {/* Imagen 3 */}
+      <div>📷 ACÁ VA LA IMAGEN 3</div>
+
+      <h3>Good Style hoy</h3>
+
+      <p>Cuando apareció la oportunidad de abrir un local...</p>
+      <p>Hoy cada uno tiene un rol que disfruta...</p>
+      <p>Nuestro camino no siempre fue fácil...</p>
+      <p>Todavía nos emociona pensar...</p>
+      <p>Hoy esa historia continúa en esta página web.</p>
+
+      <p>
+        <strong>
+          Gracias por formar parte de Good Style. Cada compra no solo apoya un
+          negocio; también acompaña el sueño de dos personas que un día decidieron
+          animarse a empezar.
+        </strong>
+      </p>
+
+      <button
+        onClick={() => setHistoriaAbierta(false)}
+        style={{
+          marginTop: "30px",
+          width: "100%",
+          padding: "15px",
+          background: "#111",
+          color: "white",
+          border: "none",
+          borderRadius: "10px",
+          cursor: "pointer",
+        }}
+      >
+        Cerrar
+      </button>
+
+    </div>
+  </div>
+)}
+<button
+  onClick={() => setCarritoAbierto((prev) => !prev)}
+></button>
 <button
     onClick={() => setCarritoAbierto((prev) => !prev)}
     style={{
@@ -463,27 +711,44 @@ export default function Home() {
       <p>Tu carrito está vacío.</p>
     ) : (
       <>
-        {carrito.map((producto, index) => (
-          <div
-            key={index}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "15px",
-              borderBottom: "1px solid #ddd",
-              paddingBottom: "10px",
-            }}
-          >
-            <div>
-              <strong>{producto.nombre}</strong>
-              <br />
-              {producto.precio}
-            </div>
+       {carrito.map((producto, index) => (
+  <div
+    key={index}
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: "15px",
+      borderBottom: "1px solid #ddd",
+      paddingBottom: "10px",
+    }}
+  >
+    <div>
+      <strong>{producto.nombre}</strong>
+      <br />
+      {producto.precio}
+    </div>
 
-            
-          </div>
-        ))}
+    <button
+      onClick={() =>
+        setCarrito(carrito.filter((_, i) => i !== index))
+      }
+      style={{
+        background: "#ff4d4d",
+        color: "white",
+        border: "none",
+        width: "35px",
+        height: "35px",
+        borderRadius: "50%",
+        cursor: "pointer",
+        fontSize: "18px",
+        fontWeight: "bold",
+      }}
+    >
+      ✕
+    </button>
+  </div>
+))}
 
         <h3>Total: ${total.toLocaleString("es-AR")}</h3>
 
