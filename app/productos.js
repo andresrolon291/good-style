@@ -360,14 +360,6 @@ export const productos = [
     },
     {
         categoria: "Buzos",
-        nombre: "Buzo Over New York 99",
-        precio: "$40.000",
-        imagen: "/productos/buzo-over-new-york-99-1.jpeg",
-        imagen2: "/productos/buzo-over-new-york-99-2.jpeg",
-        talles: "M",
-    },
-    {
-        categoria: "Buzos",
         nombre: "Buzo Over Ne",
         precio: "$37.000",
         imagen: "/productos/buzo-over-ne-1.jpeg",
