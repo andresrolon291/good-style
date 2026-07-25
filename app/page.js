@@ -228,7 +228,7 @@ export default function Home() {
     {
       nombre: "Zapatillas",
       label: "Zapatillas",
-      imagen: productos.find((item) => item.categoria === "Zapatillas" && item.imagen)?.imagen || "straye-black.jpeg",
+      imagen: productos.find((item) => item.categoria === "Zapatillas" && item.imagen)?.imagen || "vans-hylane-gris-39.jpeg",
     },
     {
       nombre: "Nuestra Historia",
