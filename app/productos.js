@@ -844,14 +844,6 @@ export const productos = [
     },
     {
         categoria: "Accesorios",
-        nombre: "Perfume Velvet 80ML",
-        precio: "$28.500",
-        imagen: "/productos/perf-velvet.jpeg",
-        imagen2: "/productos/perf-velvet-2.jpeg",
-        descripcion: "Es un perfume profundo y envolvente. convina el oud con cuero, ambar y notas amaderadas creando un aroma calido, elgante y duradero ideal para uso de noche",
-    },
-    {
-        categoria: "Accesorios",
         nombre: "Fakhar Lattafa",
         precio: "$30.000",
         imagen: "/productos/fakhar-latfafa-70-ml.jpeg",
