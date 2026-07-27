@@ -751,7 +751,7 @@ export const productos = [
         nombre: "Gorra cerrada NY World",
         precio: "$25.500",
         imagen: "/productos/ny-world-1.jpeg",
-        imagen2: "/productos/ny-world.jpeg",
+        imagen2: "/productos/ny-world-2.jpeg",
     },
     {
         categoria: "Accesorios",
