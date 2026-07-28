@@ -7,6 +7,7 @@ import { getCatalogo } from "./productosStore";
 const CATEGORIAS = [
   "Todos",
   "Jeans",
+  "Bermudas",
   "Buzos",
   "Remeras",
   "Accesorios",
@@ -205,6 +206,11 @@ export default function Home() {
   )}`;
 
   const categoriasDestacadas = [
+    {
+      nombre: "Bermudas",
+      label: "Bermudas",
+      imagen: productos.find((item) => item.categoria === "Bermudas" && item.imagen)?.imagen || "/bermudas/super-baggy-gris-nevdo.jpeg",
+    },
     {
       nombre: "Jeans",
       label: "Jeans",
